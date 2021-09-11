@@ -249,10 +249,10 @@ loadTwoPlayerGame = function () {
     function onDragStart(source, piece, position, orientation) {
 
       //only allow pieces to be moved if board is oriented correctly
-      // if ((orientation === 'white' && piece.search(/^w/) === -1) ||
-      //   (orientation === 'black' && piece.search(/^b/) === -1)) {
-      //   return false
-      // }
+       if ((orientation === 'white' && piece.search(/^w/) === -1) ||
+         (orientation === 'black' && piece.search(/^b/) === -1)) {
+         return false
+       }
 
       // do not pick up pieces if the game is over
       if (game.game_over())
