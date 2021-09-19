@@ -1,1 +1,0 @@
-# hrazintakyt.github.io
