@@ -1,0 +1,182 @@
+<html>
+    <head>
+            <meta charset="utf-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <title>Crypto Knight</title>
+            <!-- Favicon-->
+            <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+            <!-- Font Awesome icons (free version)-->
+            <script
+              src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+              crossorigin="anonymous"
+            ></script>
+            <!-- Google fonts-->
+            <link
+              href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+              rel="stylesheet"
+            />
+            <link
+              href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+              rel="stylesheet"
+              type="text/css"
+            />
+            <!-- Third party plugin CSS-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+            <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css"
+            />
+            <link
+              href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+              rel="stylesheet"
+            />
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+            <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css"
+            />
+            <link href="app.css" rel="stylesheet" />
+
+            
+            
+          </head>
+   
+    <body>
+        
+         <!-- Navigation-->
+    <nav
+    class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+    id="mainNav"
+  >
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Crypto Knight</a>
+      <button
+        class="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+      </div>
+    </div>
+  </nav>
+
+
+  <!--body-->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-lg-10 align-self-end">
+          <!--    <h1 class="text-uppercase text-white font-weight-bold">Crypto and Chess</h1>  -->
+        </div>
+      
+        <div id="Login" class="signup-form" style="-moz-box-shadow: 0 0 3px #ccc;
+        -webkit-box-shadow: 0 0 3px #ccc;
+        box-shadow: 0 0 3px #ccc;">
+          <form action="" method="" class="form-horizontal">
+            <div class="row">
+              <div class="col-8 offset-4">
+                <h2 style="color: white">Login</h2>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-4">Email</label>
+              <div class="col-8">
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  required="required"
+                />
+              </div>
+            </div>
+          
+            <div class="form-group row">
+              <label class="col-form-label col-4">Password</label>
+              <div class="col-8">
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  required="required"
+                />
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-8 offset-4">
+               
+                
+              </div>
+            </div>
+            
+          </form>
+          <button id="loginToGrem" class="btn btn-primary btn-lg" style="position: relative; margin-left: 35%; margin-right: 25%; width: 40%;">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+          <!-- Footer-->
+    <footer class="bg-light py-5">
+        <div class="container">
+          <div class="small text-center text-muted">
+            Copyright &copy; 2021 - Grem
+          </div>
+        </div>
+      </footer>
+
+       <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+       <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+
+
+      <script src="./login.js"></script>
+
+      <script>
+        //initializeFireBase:
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYWOkstaJjlQl3921ha4rlxn-okivM7Os",
+    authDomain: "gremchess.firebaseapp.com",
+    projectId: "gremchess",
+    storageBucket: "gremchess.appspot.com",
+    messagingSenderId: "775453383771",
+    appId: "1:775453383771:web:c4495af2fade87b4ac337e",
+    measurementId: "G-L0B8RVDQ7D"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
+
+
+    </script>
+      
+    </body>
+</html>

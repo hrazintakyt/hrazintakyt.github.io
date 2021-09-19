@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Crypto Knight</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    
+
+    <!--socket connection-->
+    <!--<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <script>
+      var socket = io();
+    </script>
+    -->
+    
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Third party plugin CSS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css"
+    />
+    <link href="./app.css" rel="stylesheet" type="text/css" />
+    
+
+
+    <style>
+      
+
+      td::after{
+          box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+          transition: opacity 0.3s ease-in-out;
+          z-index: -1;
+          content: '';
+          position: absolute;
+          border-radius: 0px;
+      }
+
+      @media screen and (max-width: 1048px){
+        
+          #tableContainer{
+            display: none;
+          }
+          
+         
+      }
+    
+
+  </style>
+
+  </head>
+
+  <body id="page-top">
+    <!-- Navigation-->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Crypto Knight</a>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li id="Play-btn" class="nav-item">
+              <a class="nav-link js-scroll-trigger">Play</a>
+            </li>
+            <li id="Profile-btn" class="nav-item">
+              <a class="nav-link js-scroll-trigger">Profile</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+          
+          <!--profile div-->
+          <div style="display: none; background-color: #3D4C53; top: 15vh; height: 60vh; width: 40vw; margin: auto;" id="userProfile">
+
+            <div id="containerForProfile" style="margin-left: 4vw; background-color: darkgrey; height: 80%; width: 80%; margin-top: 4vh; padding-top: 15px;">
+
+              <a href="#" style="margin-left:5%; padding-top: 5%; height: 80px; width: 50%;"><i class="fa fa-user"></i><span id="profileUserName" class="profileDetails"></span></a>
+              <hr style="width: 50%; margin-right: 50%;">
+              <a href="#" style="margin-left:5%;"><i class="fa fa-envelope-square"></i><span id="profileEmail" class="profileDetails"></span></a>
+              <hr style="width: 50%; margin-right: 50%;">
+              
+            <p id="profileGames" style="margin-left:5%;" class="profileDetails"></p>
+            <hr style="width: 50%; margin-right: 50%;">
+            <p id="profileWins" style="margin-left:5%;" class="profileDetails"></p>
+            <hr style="width: 50%; margin-right: 50%;">
+            <p id="profileLosses" style="margin-left:5%;" class="profileDetails"></p>
+            <hr style="width: 50%; margin-right: 50%;">
+            <p id="profileDraws" style="margin-left:5%;" class="profileDetails"></p>
+   
+              <div style="margin-left: 50%;">
+                
+
+                <img style="height: 90%; width: 90%; border-radius: 100%; position: relative; top:-350px;"  src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png">
+              
+                <label for='picture' style="position: absolute; top: 45vh; left: 51.5vw; border: 1px solid black; padding: 2px;">upload profile image</label>
+              
+                <form action="demo_form.asp" style='display: none;'>
+                  <input type="file" name="pic" accept=".gif,.jpg,.png,.tif|image/*" id='picture'>
+                  <input type="submit">
+                </form>
+
+            </div>
+            
+
+            <button id="signOutBtn" style="position: absolute; top: 60vh; left: 58vw; border: 1px solid black; padding: 2px;" >sign out</button>
+
+          </div>
+            
+
+            
+          </div>
+
+
+
+           
+      
+            <!--retrieving game data from server-->
+            <div id="serverOutput" style="display: none;"></div>
+          
+
+            <div id="gameData"></div>
+         
+
+
+          <div id="myBoard" class="col-lg-8 col-md-9 col-sm-12 align-self-baseline" style="margin-top: 8vh;">
+             
+          </div>
+
+        
+
+          <div class="col-lg-3 col-md-3 col-sm-0" id="tableContainer" style="margin-left: 70vw;">
+            <table id="chessTable">
+                <th class="tableHead" style="border-bottom: 1px solid black; height: 50px; width: 90vw; background-color: rgb(211,177,140);">
+                    White
+                   
+                      <span id="whtPlayerUsrNm"></span>
+                    
+                </th>
+                <th class="tableHead" style="border-bottom: 1px solid black; height: 50px; width: 90vw;  background-color: rgb(211,177,140);">
+                    Black
+                    
+                    <span id="blkPlayerUsrNm"></span>
+                </th>
+            </table>
+        </div>
+
+
+          </div>
+
+          <!--staking div-->
+          
+          <div id="stakingInterface" style="display: none;">
+
+            <section>
+             
+      
+      
+               <div class="row d-flex" style=
+              "
+              align-self: center;
+              margin-left: 5%;
+              top: 10px;
+              bottom: 10px;">
+             
+                <div  style="min-width: 50vw; max-width: 60vw; margin-left: 18vw; margin-top: 10vh;">
+                
+                  <div class="card"> 
+                    <div class="card-body">
+                     
+                      
+                      <button
+                        class="btn btn-primary btn-sm btn-block mb-3"
+                        id="connectButton"
+                       disabled
+                      >
+                      Connect
+                      </button>
+      
+                      <button
+                        class="btn btn-primary btn-sm btn-block mb-3"
+                        id="getAccounts"
+                      >
+                        eth_accounts
+                      </button>
+      
+                      <p>
+                        eth address:
+                        <span id="accounts"> </span>
+                      </p>
+                      <select name="pool" id="poolSelect">
+                        <option value="0">Free Game</option>
+                        <option value="0x367984e77a000">0.000958 Etherium</option>
+                        <option value="0x467984e77a000">0.00124 Etherium</option>
+                        <option value="0x567984e77a000">0.001521 Etherium</option>
+                      </select>
+                      <button id="send-button" style="margin-bottom: 10px;">Pay</button>
+                      <button id="findOpponent" style="position: flex; bottom: 10px;">Seek Game</button>
+                      <div id="status"></div>
+
+                      
+                    </div>
+
+                      
+              
+
+                    
+                  </div>
+                  
+                   
+                  
+                </div>
+               
+              </div>
+            
+              <script src="./metaMask.js" type="text/javascript"></script>
+             
+            
+
+
+              <section>
+
+               
+
+                  <!--adding the script for loading here, as well as the differing js files that will be needed depending on
+                  whether you are playing as white or as black -->
+                     <!--JS scripts-->
+    
+    
+    
+                   
+
+
+                  <!--If not a free game, we need to ensure that the payment is made before assigning a color-->
+                  
+
+                   <!--Once status shows that the payment is succesful, you can put in winnings address-->
+                  
+
+
+                  <script>
+
+                    window.onload = (function(){
+
+                        
+                      var pay = document.getElementById('send-button');
+                      var gameValue = document.getElementById("poolSelect");
+                      var status = document.getElementById("status");
+                      var seekGameButton = document.getElementById("findOpponent");
+
+                      
+                      seekGameButton.disabled = true;
+                    
+                      
+                    
+                    pay.addEventListener('click', () => {
+                      var el = gameValue.selectedIndex;
+                      var elHt = gameValue.children[el];
+                      console.log(elHt.value);
+                      var payVal = elHt.value;
+                      if(payVal == 0){
+                        seekGameButton.disabled = false;
+                        pay.disabled = true;
+                        gameValue.disabled = true;
+                        return;
+                      }
+                      let accounts = [];
+                    var userAct = document.getElementById('accounts');
+                    accounts.push(userAct.innerHTML)
+                    
+                      ethereum
+                     .request({
+                     method: 'eth_sendTransaction',
+                    params: [
+                    {
+                     from: accounts[0],
+                     to: '0x17f4212a49979e2f2f46d9c5ca0ea489521d6458',
+                      //value: '0x29a2241af62c0000',
+                      value: payVal,
+                      //gasPrice: '0x09184e72a000',
+                     gas: '0x2710',
+                   },
+                  ],
+               })
+                .then((txHash) => function(txHash){
+                  console.log(txHash);
+                  console.log(payVal);
+                  seekGameButton.disabled = false;
+                })
+               .catch((error) => function(error){
+                 console.log(error);
+                 
+               });
+            });
+
+                    });
+                    
+
+
+                  </script>
+
+
+    
+
+            
+                 
+
+              </section>
+              <!--add event listener to listen to the value change, to enable payment if not free-->
+           
+
+          
+             
+               
+             
+
+            
+
+
+
+          
+
+          </div>
+
+          <!--signup div-->
+          <div style="display: none; margin-left: 22vw;" id="Signup" class="signup-form">
+            <form action="" method="" class="form-horizontal">
+              <div class="row">
+                <div class="col-8 offset-4">
+                  <h2 style="color: white">Sign Up</h2>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Username</label>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Email Address</label>
+                <div class="col-8">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Password</label>
+                <div class="col-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Confirm Password</label>
+                <div class="col-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="confirm_password"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-8 offset-4">
+                  <p>
+                    <label class="form-check-label"
+                      ><input type="checkbox" required="required" /> I accept
+                      the <a href="#">Terms of Use</a> &amp;
+                      <a href="#">Privacy Policy</a>.</label
+                    >
+                  </p>
+                  <button type="submit" class="btn btn-primary btn-lg" id="signUpForGrem">
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="text-center">
+              Already have an account? <a href="lgn.html">Login here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </header>
+
+    <div id="pngBox" style="display: none"></div>
+
+    <!-- Footer-->
+    <footer class="bg-light py-5">
+      <div class="container">
+        <div class="small text-center text-muted">
+          Copyright &copy; 2021 - Grem
+        </div>
+      </div>
+    </footer>
+
+
+
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+ <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+ <!-- Add Firebase products that you want to use -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+
+   
+    
+ <script src="./signup.js"></script>
+    
+    
+   
+
+
+    <script>
+        //initializeFireBase:
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYWOkstaJjlQl3921ha4rlxn-okivM7Os",
+    authDomain: "gremchess.firebaseapp.com",
+    databaseURL: "https://gremchess-default-rtdb.firebaseio.com",
+    projectId: "gremchess",
+    storageBucket: "gremchess.appspot.com",
+    messagingSenderId: "775453383771",
+    appId: "1:775453383771:web:c4495af2fade87b4ac337e",
+    measurementId: "G-L0B8RVDQ7D"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  db.settings({ timestampsInSnapshots: true});
+  //firebase.analytics();
+  
+
+
+    </script>
+
+<!--connecting the indexjs to the index html after firebase gets initialized so that hopefully we can access the firebase variable-->
+<script src="./chessboard.js"></script>
+
+<script src="./whitePlayerChessGame.js"></script>
+
+<script src="./blackPlayerChessGame.js"></script>
+
+<script src="./loadUp.js"></script>
+
+
+
+  </body>
+  <script src="./scripts.js"></script>
+</html>
