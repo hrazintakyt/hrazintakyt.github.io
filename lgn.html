@@ -142,6 +142,26 @@
           </div>
         </div>
       </footer>
+        
+        
+      <script>
+
+        var loginForm = document.getElementById("Login");
+
+        var intViewportWidth = window.innerWidth;
+
+        var styleObjLarge = ( "-moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc;" );
+
+        var styleObjSmall = ( "-moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow: 0 0 3px #ccc; box-shadow: 0 0 3px #ccc; display: block; left: 0px; right: 0px; height: 60vh; margin-top: 2vh; width: 100vw; position: absolute;" );
+
+        console.log(intViewportWidth);
+
+      if(intViewportWidth > 992){
+        loginForm.style = styleObjLarge;
+        }else if(intViewportWidth <= 992){
+          loginForm.style = styleObjSmall;
+        }
+      </script>
 
        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
