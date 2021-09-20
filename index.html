@@ -107,6 +107,7 @@
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="index.html">Crypto Knight</a>
         <button
+          id="toggleSubNavBar"
           class="navbar-toggler navbar-toggler-right"
           type="button"
           data-toggle="expand"
@@ -115,7 +116,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span id="hamburgerMenu" class="navbar-toggler-icon navbar-toggler"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto my-2 my-lg-0">
@@ -128,6 +129,29 @@
             
           </ul>
         </div>
+        
+        <script>
+          var snb = document.getElementById("toggleSubNavBar");
+          var respNav = document.getElementById("navbarResponsive");
+          respNav.toggled = false;
+
+          snb.onclick = function(){
+            
+            if(respNav.toggled == false){
+              respNav.style = ("display: block; position: absolute; right: 3vw; top: 9.5vh; background-color: white; width: 25vw;");
+              respNav.children[0].children[0].style = "margin-left: 35%;";
+              respNav.children[0].children[1].style = "margin-left: 35%;";
+              
+              respNav.toggled = true;
+            }
+            else if(respNav.toggled == true){
+              respNav.style = ("display: none;");
+              respNav.toggled = false;
+            }
+            
+          }
+        </script>
+        
       </div>
     </nav>
     <!-- Masthead-->
