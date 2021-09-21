@@ -410,12 +410,14 @@
                   
                   var confirMation = db.collection("Vdation").doc();
                   var confRef = confirMation.path;
+                  var subStringRef = referencePath.substring(7, referencePath.length);
+                   
                        
                   confirMation.set({
                     aibasd: txHash,
                     kqftf: elHt,
-                    underBelly: "'0x17f4212a49979e2f2f46d9c5ca0ea489521d6458",
-                    not12g6jhh3: confRef
+                    underBelly: "0x17f4212a49979e2f2f46d9c5ca0ea489521d6458",
+                    not12g6jhh3: subStringRef
                   });     
                        alert("set");
                   seekGameButton.disabled = false;
