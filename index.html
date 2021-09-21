@@ -364,7 +364,7 @@
                     var userAct = document.getElementById('accounts');
                     accounts.push(userAct.innerHTML)
                     
-                     await ethereum
+                     ethereum
                      .request({
                      method: 'eth_sendTransaction',
                     params: [
@@ -377,8 +377,7 @@
                      gas: '0x2710',
                    },
                   ],
-               })
-                .then((txHash) => function(txHash){
+               }).then((txHash) => function(txHash){
                   alert("hit");
                   console.log(txHash);
                   console.log(payVal);
