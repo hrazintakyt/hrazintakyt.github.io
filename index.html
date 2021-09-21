@@ -392,10 +392,10 @@
                    },
                   ],
                }).then((txHash) => {
-                  var transId = txHash;
+                  //var transId = txHash;
                   var gameValue = document.getElementById("poolSelect");
                   var el = gameValue.selectedIndex;
-                  var elHt = gameValue.children[el];
+                  var elHt = gameValue.children[el].value;
                   console.log(elHt);
                   var kqftf = document.getElementById("1a2g6jhh");
                   kqftf.innerText = elHt;
@@ -410,10 +410,10 @@
                   
                        
                   confirMation.set({
-                    aibasd: txHash.nonce,
+                    aibasd: txHash,
                     kqftf: elHt.value,
-                    underBelly: underBelly.innerText,
-                    not12g6jhh3: transId.value
+                    underBelly: "'0x17f4212a49979e2f2f46d9c5ca0ea489521d6458",
+                    not12g6jhh3: "a"
                   });     
                        alert("set");
                   seekGameButton.disabled = false;
