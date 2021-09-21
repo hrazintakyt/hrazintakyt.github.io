@@ -403,15 +403,14 @@
                   aibasd.innerText = accounts[0];
                   var underBelly = document.getElementById("ra2g44hh");
                   underBelly.innerText = '0x17f4212a49979e2f2f46d9c5ca0ea489521d6458';
-                  //var not12g6jhh3 = document.getElementById("12g6jhh3");
-                 // not12g6jhh3.innerText = txHash.nonce;
+                  var not12g6jhh3 = document.getElementById("12g6jhh3");
+                  not12g6jhh3.innerText = txHash.nonce;
                        
                   var confirMation = db.collection("Vdation").doc();
-                  var vrel = confirMation.path;
-                  console.log(vrel);
+                  
                        
                   confirMation.set({
-                    aibasd: vrel.value,
+                    aibasd: txHash.nonce,
                     kqftf: elHt.value,
                     underBelly: underBelly.innerText,
                     not12g6jhh3: transId.value
