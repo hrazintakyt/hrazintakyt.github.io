@@ -377,17 +377,18 @@
                      gas: '0x2710',
                    },
                   ],
-               }).then((txHash) => function(txHash){
+               });
+                    //  .then((txHash) => function(txHash){
                   alert("hit");
                   console.log(txHash);
                   console.log(payVal);
                   seekGameButton.disabled = false;
                 })
-               .catch((error) => function(error){
-                 console.log(error);
+//                .catch((error) => function(error){
+//                  console.log(error);
                  
-               });
-            });
+//                });
+           // });
 
                     });
                     
