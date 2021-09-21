@@ -406,12 +406,12 @@
                   var underBelly = document.getElementById("ra2g44hh");
                   underBelly.innerText = '0x17f4212a49979e2f2f46d9c5ca0ea489521d6458';
                   var not12g6jhh3 = document.getElementById("12g6jhh3");
-                  not12g6jhh3.innerText = txHash.nonce;
+                  
                   
                   var confirMation = db.collection("Vdation").doc();
                   var confRef = confirMation.path;
-                  var subStringRef = confRef.substring(7, confRef.length);
-                   
+                  var subStringRef = confRef.substring(8, confRef.length);
+                  not12g6jhh3.innerText = subStringRef;
                        
                   confirMation.set({
                     aibasd: txHash,
