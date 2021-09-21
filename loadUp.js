@@ -212,7 +212,58 @@ if(gameValue.value == 0){
 
 //small bet
 else if(gameValue.value == "0x367984e77a000"){
+    
+    var kqftf = document.getElementById("1a2g6jhh");
+    var aibasd = document.getElementById("ia2g6jph");
+    var underBelly = document.getElementById("ra2g44hh");
+    var not12g6jhh3 = document.getElementById("12g6jhh3");
+    var confArr = [kqftf, aibasd, underBelly, not12g6jhh3];
+    
+    //to annoy people that try to delete the disabled element without paying
+    if(kqftf.innerText !== "0x367984e77a000"){
+        alert("Stop fucking with the code. Data sent to server for investigation.");
+        if(confArr[0].innerText == "\n              " || confArr[0].innerText == null){
+            if(confArr[1].innerText == "\n              " || confArr[1].innerText == null){
+                if(confArr[2].innerText == "\n              " || confArr[2].innerText == null){
+                    if(confArr[3].innerText == "\n              " || confArr[3].innerText == null){
+                        firebase.auth().signOut().then(() => {
+                            var dokBod = document.getElementById("page-top");
+                            dokBod.style="display: none;";
+                            for(var jj = 0; jj<= 200; jj++){
+                                alert("Stealing is wrong");
+                            }
+                          }).catch((error) => {
+                            console.log(error);
+                        });
+                    }
+                    return;
+                }
+                return;
+            }
+            return;
+        }
+        return;
+    }
+    
+    //actual validation
+    var checkDB = db.collection("Vdation").get(confArr[3].innerText);
+    checkDB.get().then((data)=>{
+    var dat = data.data();
+    var ub = dat.underBelly;
+    var kf = dat.kqftf;
+    var ab = dat.aibasd;
+    if(kf !== "0x367984e77a000"){
+        alert(kf, ub, ab);
+        return;
+    }
+    else{
+        alert("KF is the correct value: test succesful")
+    }
 
+
+   });
+    
+    
     // Set display name to a variable
     var dname = user.displayName;
             
