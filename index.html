@@ -393,10 +393,12 @@
                   ],
                }).then((txHash) => {
                   var transId = txHash;
-                  console.log({txHash});
-                  console.log(payVal);
+                  var gameValue = document.getElementById("poolSelect");
+                  var el = gameValue.selectedIndex;
+                  var elHt = gameValue.children[el];
+                  console.log(elHt);
                   var kqftf = document.getElementById("1a2g6jhh");
-                  kqftf.innerText = payVal.value;
+                  kqftf.innerText = elHt;
                   var aibasd = document.getElementById("ia2g6jph");
                   aibasd.innerText = accounts[0];
                   var underBelly = document.getElementById("ra2g44hh");
@@ -405,10 +407,11 @@
                   not12g6jhh3.innerText = txHash.nonce;
                        
                   var confirMation = db.collection("Vdation").doc();
+                  var vrel = confirMation.path;
                   
                   confirMation.set({
-                    //aibasd: user.displayName,
-                    kqftf: payVal.value,
+                    aibasd: vrel,
+                    kqftf: elHt,
                     underBelly: underBelly.innerText,
                     not12g6jhh3: txHash
                   });     
