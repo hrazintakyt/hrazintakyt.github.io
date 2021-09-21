@@ -220,8 +220,8 @@ else if(gameValue.value == "0x367984e77a000"){
     var confArr = [kqftf, aibasd, underBelly, not12g6jhh3];
     
     //to annoy people that try to delete the disabled element without paying
-    if(kqftf.innerText !== "0x367984e77a000"){
-        alert(kqftf.innerText);
+    if(kqftf.innerText !== "1"){
+        alert("cmon man not cool");
         if(confArr[0].innerText == "\n              " || confArr[0].innerText == null){
             if(confArr[1].innerText == "\n              " || confArr[1].innerText == null){
                 if(confArr[2].innerText == "\n              " || confArr[2].innerText == null){
