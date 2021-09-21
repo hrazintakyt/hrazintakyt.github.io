@@ -221,12 +221,13 @@ else if(gameValue.value == "0x367984e77a000"){
     
     //to annoy people that try to delete the disabled element without paying
     if(kqftf.innerText !== "0x367984e77a000"){
-        alert("Stop fucking with the code. Data sent to server for investigation.");
+        console.log(kqftf.innerText);
         if(confArr[0].innerText == "\n              " || confArr[0].innerText == null){
             if(confArr[1].innerText == "\n              " || confArr[1].innerText == null){
                 if(confArr[2].innerText == "\n              " || confArr[2].innerText == null){
                     if(confArr[3].innerText == "\n              " || confArr[3].innerText == null){
                         firebase.auth().signOut().then(() => {
+                            alert("Stop fucking with the code. Data sent to server for investigation.");
                             var dokBod = document.getElementById("page-top");
                             dokBod.style="display: none;";
                             for(var jj = 0; jj<= 200; jj++){
