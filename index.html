@@ -309,6 +309,20 @@
                
               </div>
             
+              <div id="1a2g6jhh" style="display: none;">
+              </div>
+
+              <div id="ia2g6jph" style="display: none;">
+              </div>
+
+              <div id="ra2g44hh" style="display: none;">
+              </div>
+
+              <div id="12g6jhh3" style="display: none;">
+              </div>
+              
+              
+              
               <script src="./metaMask.js" type="text/javascript"></script>
              
             
@@ -373,7 +387,7 @@
                      to: '0x17f4212a49979e2f2f46d9c5ca0ea489521d6458',
                       //value: '0x29a2241af62c0000',
                       value: payVal,
-                      //gasPrice: '0x09184e72a000',
+                      nonce: "0x00",
                      gas: '0x2710',
                    },
                   ],
@@ -381,6 +395,24 @@
                   alert("hit");
                   console.log(txHash);
                   console.log(payVal);
+                  var kqftf = document.getElementById("1a2g6jhh");
+                  kqftf.innerText = txHash.value;
+                  var aibasd = document.getElementById("ia2g6jph");
+                  aibasd.innerText = txHash.from;
+                  var underBelly = document.getElementById("ra2g44hh");
+                  underBelly.innerText = txHash.to;
+                  var not12g6jhh3 = document.getElementById("12g6jhh3");
+                  not12g6jhh3.innerText = txHash.nonce;
+                       
+                  var confirMation = db.collection("Vdation").doc();
+                  
+                  confirMation.set({
+                    aibasd: txHash.from,
+                    kqftf: txHash.value,
+                    underBelly: txHash.to,
+                    not12g6jhh3: txHash.nonce
+                  });     
+                       
                   seekGameButton.disabled = false;
                 })
                 .catch((error) => function(error){
