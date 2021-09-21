@@ -246,22 +246,23 @@ else if(gameValue.value == "0x367984e77a000"){
         return;
     }
     
-    var chkDb = not12g6jhh3.innerHTML
     //actual validation
+    var chkDb = not12g6jhh3.innerHTML
     var checkDB = db.collection("Vdation").doc(chkDb);
     checkDB.get().then((data)=>{
+        
     var dat = data.data();
     var ub = dat.underBelly;
     var kf = dat.kqftf;
     var ab = dat.aibasd;
+        
     if(kf !== "0x367984e77a000"){
-        alert(kf, ub, ab);
+        alert("incorrect value, aborting game");
         return;
     }
     else{
         alert("KF is the correct value: test succesful")
     }
-
 
    });
     
