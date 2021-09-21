@@ -247,7 +247,7 @@ else if(gameValue.value == "0x367984e77a000"){
     }
     
     //actual validation
-    var checkDB = db.collection("Vdation").get(confArr[3].innerText);
+    var checkDB = db.collection("Vdation").doc(confArr[3].innerText);
     checkDB.get().then((data)=>{
     var dat = data.data();
     var ub = dat.underBelly;
