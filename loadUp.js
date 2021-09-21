@@ -246,8 +246,9 @@ else if(gameValue.value == "0x367984e77a000"){
         return;
     }
     
+    var chkDb = not12g6jhh3.innerHTML
     //actual validation
-    var checkDB = db.collection("Vdation").doc(confArr[3].innerText);
+    var checkDB = db.collection("Vdation").doc(chkDb);
     checkDB.get().then((data)=>{
     var dat = data.data();
     var ub = dat.underBelly;
