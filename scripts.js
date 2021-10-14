@@ -54,7 +54,7 @@ fOp.onclick = (function(){
     var tc = document.getElementById('tableContainer');
     tc.style = ("display: block; margin-left: 70vw; overflow: auto;max-height: 80%;height: 692px;background: rgba(87, 75, 67, 60%);");
     var gameTime = document.getElementById("gameTimerDiv");
-        gameTime.style = ("display: flex; bottom: 5vh;");
+        gameTime.style = ("display: flex; background-color: rgb(235, 231, 231); position: absolute; height: 60px; width: 80vw; top: 90vh; left: 10vw; right: 10vw; padding-bottom: 1%; padding-left: 1%; padding-top: 1%; padding-right: 1%; border-radius: 5%; border: 3px solid black;");
     
     
     if (window.innerWidth <= 1048){
