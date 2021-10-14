@@ -10261,14 +10261,14 @@ th {
 
 #tableContainer {
   position: absolute;
-  height: 700px;
-  background-color: #345995;
+  height: 692px;
+  max-height: 80%;
+  background: rgba(87, 75, 67, 60%);
   -moz-box-shadow: 0 0 3px #ccc;
   -webkit-box-shadow: 0 0 3px #ccc;
   box-shadow: 0 0 3px #ccc;
   width: 320px;
   left: 3vw;
-  top: 16vh;
   overflow: auto;
 }
 nav:hover {
@@ -10332,11 +10332,6 @@ color: black;
     background: #555; 
   }
 
- #tableContainer {
-    overflow: auto;
-    max-height: 80%;
-    height: 692px;
-    background: rgba(87, 75, 67, 60%);
-} 
+
 
 
