@@ -178,17 +178,14 @@ profBtn.onclick = (function(){
                 var myProfPic = document.getElementById("myProfPic2");
                 var childImg = document.createElement("img");
                 
-                if(myProfPic.children[0].src !== imgUrl){
+                console.log(myProfPic.children);
                 childImg.src = imgUrl;
                 childImg.style = "height: 180px; width: 160px; border: 2px solid black;";
                 myProfPic.appendChild(childImg);
                 myProfPic.style = "position: relative; margin-left: 2vw;";
                 var inpt = document.getElementById("inputFileToLoad");
                 inpt.style = "margin-left: 2vw;";
-                }else{
-                //do nothing
-                    console.log(myProfPic.children[0]);
-                }
+                
                 
 
   });
