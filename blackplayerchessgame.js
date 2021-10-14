@@ -1,8 +1,11 @@
 startBlackPlayerChessGame = function () {
+
+  var deleteLoad = document.getElementsByClassName("deleteLoadScreenOnGameStart");
+  deleteLoad[0].remove();
+
   var pbtn = document.getElementById("Play-btn");
 
   var prbtn = document.getElementById("Profile-btn");
-
 
   pbtn.onclick = function (e) {
     e.preventDefault();
@@ -37,19 +40,147 @@ startBlackPlayerChessGame = function () {
             //==============================================================================================================//
             var game = new Chess();
 
+            var domOut = document.getElementById("whiteClock");
+            var tblack = document.getElementById("blackClock");
+           
+            var gameTime = 300;
+            var whiteGameTime = 300;
+            var blackGameTime = 300;
+
+            domOut.innerHTML = gameTime % 60;
+            tblack.innerHTML = gameTime % 60;
+
+
+            const timerW = new Timer({ label: 'whiteTimer' });
+            const timerB = new Timer({ label: 'blackTimer' });
+           
+           
+            
+            var blackTurn = setInterval(function(){ 
+
+
+              if(timerB.isRunning() == true){
+
+                  if(blackGameTime === -1){
+                      alert("you lose");
+                      timerW.stop();
+                      timerB.stop();
+                      whiteGameTime = gameTime;
+                      blackGameTime = gameTime;
+                      domOut.innerHTML = whiteGameTime;
+                      tblack.innerHTML = blackGameTime;
+                      stopInterval(whiteTurn);
+                      stopInterval(blackTurn);
+          
+                    }
+
+                    var mins = Math.floor(blackGameTime / 60);
+                    var secs = blackGameTime % 60;
+                    var blkmn = document.getElementById("blkmn");
+
+                 if(secs <= 9){
+                     blkmn.innerHTML = mins + ":0" + secs;
+                 }else{
+                     blkmn.innerHTML = mins + ":" + secs;
+                  }
+      
+                  tblack.innerHTML = blackGameTime - 1;
+                  var temp = tblack.innerHTML;
+                  pbgt = parseInt(temp);
+                  blackGameTime = pbgt;
+      
+                }else{
+                 //do nothing
+               }
+      
+
+              }, 1000);
+
+
+
+              var whiteTurn = setInterval(function(){ 
+
+
+                if(timerW.isRunning() == true)
+                {
+                    if(whiteGameTime === -1){
+                        alert("you win");
+                        timerW.stop();
+                        timerB.stop();
+                        whiteGameTime = gameTime;
+                        blackGameTime = gameTime;
+                        domOut.innerHTML = whiteGameTime;
+                        tblack.innerHTML = blackGameTime;
+                        stopInterval(whiteTurn);
+                        stopInterval(blackTurn);
+                        
+                    }
+                    else{
+            
+                    var mins = Math.floor(whiteGameTime / 60);
+                    var secs = whiteGameTime % 60;
+                    var whtmn = document.getElementById("whtmn");
+            
+                    if(secs <= 9){
+                        whtmn.innerHTML = mins + ":0" + secs;
+                    }else{
+                        whtmn.innerHTML = mins + ":" + secs;
+                    }
+            
+            
+                    domOut.innerHTML = whiteGameTime - 1;
+                    var temp = domOut.innerHTML
+                    pwgt = parseInt(temp);
+                    whiteGameTime = pwgt;
+                    }
+                    
+                }else{
+                    //do nothing
+                }
+                 }, 1000);
+
 
             var gameId = temp.gameId;
+            
+            
+
+
+
 
             db.collection("chessGame").doc(gameId)
               .onSnapshot((dataW) => {
                 var dat = dataW.data();
                 console.log(dat);
                 var turn = dat.turn;
+                
+               
+                
+
+               
+
+
                 if (turn == "w") {
-                  console.log("Not your turn probably");
+                  
+                    //make sure the correct clock is ticking:
+                    if(timerB.isRunning() == true){
+                      //if the white timer is running and the change turn event gets triggered, stop the white timer, and start the black timer
+                      timerB.stop();
+                      timerW.start();
+                  }else if(timerW.isRunning() == false){
+                    timerW.start();
+                  }
+  
                   return;
                 }
+                
+                
+
                 console.log("Should be blacks turn " + turn);
+                if(turn == "b"){
+                  timerW.stop();
+                  timerB.start();
+                }
+                
                 var currentFenString = dat.fenStringData;
                 console.log(currentFenString);
                 game.load(currentFenString);

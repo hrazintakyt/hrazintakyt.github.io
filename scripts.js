@@ -10,10 +10,12 @@ var playBtn = document.getElementById('Play-btn');
         var mb = document.getElementById('myBoard');
         mb.style = ( "display: flex; margin-top: 8vh;" );
         var ct = document.getElementById('chessTable');
+
         var lengthConst = ct.children.length;
             for (var i = 0; i<lengthConst-1; i++){
                 ct.children[1].remove();
             }
+
     
         board.position("start");
         game = new Chess();
@@ -50,8 +52,19 @@ fOp.onclick = (function(){
     gamblinInterface.style = "display: none;";
     var tc = document.getElementById('tableContainer');
     tc.style = ("display: block; margin-left: 70vw; overflow: auto;max-height: 80%;height: 692px;background: rgba(87, 75, 67, 60%);");
+    
+    if (window.innerWidth <= 1048){
        
-    loadUpGame();  
+            var ct = document.getElementById('chessTable');
+            ct.style = "display: none;";
+            var tabletable = document.getElementById("tableContainer");
+            tabletable.style = "display: none;";
+       
+    }
+
+
+    loadUpGame();
+     
 })
 
 
@@ -67,7 +80,7 @@ profBtn.onclick = (function(){
           
             //Create the users Profile to see
             var userProf = document.getElementById('userProfile');
-            userProf.style = ( "display: flex;" );
+            userProf.style = ( "display: flex; height: 95vh; width: 90vw; margin: auto;" );
             var myBoard = document.getElementById("myBoard");
             myBoard.style = ( "display: none;" );
             var tableCont = document.getElementById("tableContainer");
@@ -79,7 +92,7 @@ profBtn.onclick = (function(){
 
 
             //now we populate the profile.
-            console.log(user);
+            //console.log(user);
             var profileUserName = document.getElementById("profileUserName");
             profileUserName.innerHTML = " " + user.displayName;
             
@@ -99,6 +112,81 @@ profBtn.onclick = (function(){
 
             var profileGames = document.getElementById("profileGames");
             profileGames.innerHTML = "Total Games Played: " + (parseInt(profileWins.innerText[0]) + parseInt(profileLosses.innerText[0] + parseInt(profileDraws.innerText[0])));
+
+            //mutation observer to listen to profile pictures being uploaded
+            var targetNode = document.getElementById("myProfPic");
+
+            const config = { attributes: true, childList: true, subtree: true };
+
+            const callback = function(mutationsList, observer) {
+                // Use traditional 'for loops' for IE 11
+                for(const mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        
+                        //Someone uploaded a pic
+                        var strictParent = document.getElementById("myProfPic");
+                        var concernedChild = strictParent.children[0];
+                        
+                        var concernedChildSrc = concernedChild.src;
+
+                        console.log(concernedChildSrc);
+
+                        //set the static prof pic to display: null;
+                        var profPic2 = document.getElementById("myProfPic2")
+                        profPic2.style = "display: none;";
+
+                        var profImg = db.collection("ProfilePictures").doc(user.displayName);
+
+                        profImg.set({
+                            userProfile: concernedChildSrc
+                        }).then((d)=>{
+                            if(d)
+                            alert("uploaded2Server");
+                        });
+
+                        observer.disconnect();
+                    }
+                    else if (mutation.type === 'attributes') {
+                        console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                    }
+                }
+            };
+
+
+            const observer = new MutationObserver(callback);
+
+            observer.observe(targetNode, config);
+           
+
+            
+            
+
+
+  //load if exists prof picture
+  var myPic = db.collection("ProfilePictures").doc(user.displayName);
+  myPic.get().then((pic)=>{
+    if(pic)
+    
+                var profPic = pic.data();
+                var imgUrl = profPic.userProfile;
+                //using a different div to avoid triggering mutation observer rewriting image data as null
+                var myProfPic = document.getElementById("myProfPic2");
+                var childImg = document.createElement("img");
+                childImg.src = imgUrl;
+                childImg.style = "height: 180px; width: 160px; border: 2px solid black;";
+                myProfPic.appendChild(childImg);
+                myProfPic.style = "position: relative; margin-left: 2vw;";
+                var inpt = document.getElementById("inputFileToLoad");
+                inpt.style = "margin-left: 2vw;";
+                
+                
+
+  });
+            
+                
+          
+
+
 
             var signOutBtn = document.getElementById("signOutBtn");
             signOutBtn.onclick = function(){

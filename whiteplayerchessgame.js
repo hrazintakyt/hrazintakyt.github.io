@@ -1,4 +1,8 @@
 startWhitePlayerChessGame = function () {
+
+  var deleteLoad = document.getElementsByClassName("deleteLoadScreenOnGameStart");
+  deleteLoad[0].remove();
+
   var pbtn = document.getElementById("Play-btn");
 
   var prbtn = document.getElementById("Profile-btn");
@@ -6,7 +10,6 @@ startWhitePlayerChessGame = function () {
   pbtn.onclick = function (e) {
     e.preventDefault();
   }
-
   prbtn.onclick = function (e) {
     e.preventDefault();
   }
@@ -37,6 +40,107 @@ startWhitePlayerChessGame = function () {
 
             var game = new Chess();
 
+            //chess clock logic goes below:
+
+            var domOut = document.getElementById("whiteClock");
+            var tblack = document.getElementById("blackClock");
+           
+            var gameTime = 300;
+            var whiteGameTime = 300;
+            var blackGameTime = 300;
+
+            domOut.innerHTML = gameTime % 60;
+            tblack.innerHTML = gameTime % 60;
+
+
+            const timerW = new Timer({ label: 'whiteTimer' });
+            const timerB = new Timer({ label: 'blackTimer' });
+           
+           
+            
+            var blackTurn = setInterval(function(){ 
+
+
+              if(timerB.isRunning() == true){
+
+                  if(blackGameTime === -1){
+                      alert("you win");
+                      timerW.stop();
+                      timerB.stop();
+                      whiteGameTime = gameTime;
+                      blackGameTime = gameTime;
+                      domOut.innerHTML = whiteGameTime;
+                      tblack.innerHTML = blackGameTime;
+                      stopInterval(whiteTurn);
+                      stopInterval(blackTurn);
+          
+                    }
+
+                    var mins = Math.floor(blackGameTime / 60);
+                    var secs = blackGameTime % 60;
+                    var blkmn = document.getElementById("blkmn");
+
+                 if(secs <= 9){
+                     blkmn.innerHTML = mins + ":0" + secs;
+                 }else{
+                     blkmn.innerHTML = mins + ":" + secs;
+                  }
+      
+                  tblack.innerHTML = blackGameTime - 1;
+                  var temp = tblack.innerHTML;
+                  pbgt = parseInt(temp);
+                  blackGameTime = pbgt;
+      
+                }else{
+                 //do nothing
+               }
+      
+
+              }, 1000);
+
+
+
+              var whiteTurn = setInterval(function(){ 
+
+
+                if(timerW.isRunning() == true)
+                {
+                    if(whiteGameTime === -1){
+                        alert("you lose");
+                        timerW.stop();
+                        timerB.stop();
+                        whiteGameTime = gameTime;
+                        blackGameTime = gameTime;
+                        domOut.innerHTML = whiteGameTime;
+                        tblack.innerHTML = blackGameTime;
+                        stopInterval(whiteTurn);
+                        stopInterval(blackTurn);
+                        
+                    }
+                    else{
+            
+                    var mins = Math.floor(whiteGameTime / 60);
+                    var secs = whiteGameTime % 60;
+                    var whtmn = document.getElementById("whtmn");
+            
+                    if(secs <= 9){
+                        whtmn.innerHTML = mins + ":0" + secs;
+                    }else{
+                        whtmn.innerHTML = mins + ":" + secs;
+                    }
+            
+            
+                    domOut.innerHTML = whiteGameTime - 1;
+                    var temp = domOut.innerHTML
+                    pwgt = parseInt(temp);
+                    whiteGameTime = pwgt;
+                    }
+                    
+                }else{
+                    //do nothing
+                }
+                 }, 1000);
+
 
             //grab the id from the game where our name was found
             var gameId = temp.gameId;
@@ -47,16 +151,47 @@ startWhitePlayerChessGame = function () {
                 console.log(dat);
                 var turn = dat.turn;
                 console.log(turn);
+                
+                
+
+               
+                
+                
+                
+                
                 //now we listen to a change in the value of the database- if the last change was made
                 //by the opponent, we want to update our game. If it was made by us, it will be blacks 
                 //turn, in which case we want to return, until the game can be updated and the snapshot
                 //gets called again.
+
+            
+
+                //since you're the white player, if the turn is black, make sure the white timer isnt running and the black timer is running
+
                 if (turn == "b") {
-                  console.log("please wait while your opponent makes a move");
+                  //make sure the correct clock is ticking:
+                  if(timerW.isRunning() == true){
+                    //if the white timer is running and the change turn event gets triggered, stop the white timer, and start the black timer
+                    timerW.stop();
+                    timerB.start();
+                }
+
                   return;
                 }
+
+
+                
+                
+
+
                 //make sure its our turn
                 console.log("turn : " + turn);
+                if(turn == "w"){
+                timerB.stop();
+                timerW.start();
+                }
+                
+
                 var currentFenString = dat.fenStringData;
                 console.log(currentFenString);
                 //If we make sure that if it is our turn in the database, and the board FEN is different

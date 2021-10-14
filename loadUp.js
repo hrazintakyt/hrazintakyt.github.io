@@ -2,16 +2,17 @@ loadUpGame = function(){
 //the below variables are used to indicate which type of game the player is getting matched up for based on
 //the quantity of btc/eth put in.
 
-//var freeWaitList = db.collection("Queue").doc("waitList");
+var clearDiv = document.createElement('div');
+clearDiv.style = "position: absolute; z-index: 100; top: 0px; left: 0px; right: 0px; bottom: 0px; overflow: none; height: 100%; width: 100%; background-color: rgba(22,22,22,0.4); pointer-events: none;";
+clearDiv.className = "deleteLoadScreenOnGameStart";
 
-// var smallWaitList = db.collection("Queue").doc("waitListSmallBet");
+var loader = document.createElement('div');
+loader.className = "loader";
+clearDiv.appendChild(loader);
+document.body.appendChild(clearDiv);
 
-// var medWaitList = db.collection("Queue").doc("waitListMedBet");
-
-// var bigWaitList = db.collection("Queue").doc("waitListLargeBet");
-
+//get players value for comparison with authentication
 var gameValue = document.getElementById("poolSelect");
-
 
 //Now we check that the user is logged in
 firebase.auth().onAuthStateChanged(function (user) {
@@ -212,22 +213,20 @@ if(gameValue.value == 0){
 
 //small bet
 else if(gameValue.value == "0x367984e77a000"){
-    
+    //confirm MetaMask Transaction:
     var kqftf = document.getElementById("1a2g6jhh");
     var aibasd = document.getElementById("ia2g6jph");
     var underBelly = document.getElementById("ra2g44hh");
     var not12g6jhh3 = document.getElementById("12g6jhh3");
     var confArr = [kqftf, aibasd, underBelly, not12g6jhh3];
-    
-    //to annoy people that try to delete the disabled element without paying
-    if(kqftf.innerText !== "1"){
-        alert("cmon man not cool");
+
+    if(kqftf.innerText !== "0x367984e77a000"){
+        alert("Stop fucking with the code. Data sent to server for investigation.");
         if(confArr[0].innerText == "\n              " || confArr[0].innerText == null){
             if(confArr[1].innerText == "\n              " || confArr[1].innerText == null){
                 if(confArr[2].innerText == "\n              " || confArr[2].innerText == null){
                     if(confArr[3].innerText == "\n              " || confArr[3].innerText == null){
                         firebase.auth().signOut().then(() => {
-                            alert("Stop messing with the code. Data sent to server for investigation.");
                             var dokBod = document.getElementById("page-top");
                             dokBod.style="display: none;";
                             for(var jj = 0; jj<= 200; jj++){
@@ -237,36 +236,35 @@ else if(gameValue.value == "0x367984e77a000"){
                             console.log(error);
                         });
                     }
-                    return;
                 }
-                return;
+               
             }
-            return;
+           
         }
-        return;
+        
     }
     
-    //actual validation
-    var chkDb = not12g6jhh3.innerHTML
-    var checkDB = db.collection("Vdation").doc(chkDb);
-    checkDB.get().then((data)=>{
-        
-    var dat = data.data();
+    //once the user FINALLY gets out of that hellhole of a loop, we do the actual validation
+    
+   var checkDB = db.collection("Vdation").get(confArr[3].innerText);
+   checkDB.get().then((data)=>{
+       var dat = data.data();
     var ub = dat.underBelly;
     var kf = dat.kqftf;
     var ab = dat.aibasd;
-        
     if(kf !== "0x367984e77a000"){
-        alert("incorrect value, aborting game");
+        alert(kf, ub, ab);
         return;
     }
     else{
         alert("KF is the correct value: test succesful")
     }
 
+
    });
-    
-    
+     
+
+
     // Set display name to a variable
     var dname = user.displayName;
             
@@ -449,59 +447,6 @@ else if(gameValue.value == "0x367984e77a000"){
 //medium bet
 else if(gameValue.value == "0x467984e77a000"){
 
-     var kqftf = document.getElementById("1a2g6jhh");
-    var aibasd = document.getElementById("ia2g6jph");
-    var underBelly = document.getElementById("ra2g44hh");
-    var not12g6jhh3 = document.getElementById("12g6jhh3");
-    var confArr = [kqftf, aibasd, underBelly, not12g6jhh3];
-    
-    //to annoy people that try to delete the disabled element without paying
-    if(kqftf.innerText !== "2"){
-        alert("cmon man not cool");
-        if(confArr[0].innerText == "\n              " || confArr[0].innerText == null){
-            if(confArr[1].innerText == "\n              " || confArr[1].innerText == null){
-                if(confArr[2].innerText == "\n              " || confArr[2].innerText == null){
-                    if(confArr[3].innerText == "\n              " || confArr[3].innerText == null){
-                        firebase.auth().signOut().then(() => {
-                            alert("Stop messing with the code. Data sent to server for investigation.");
-                            var dokBod = document.getElementById("page-top");
-                            dokBod.style="display: none;";
-                            for(var jj = 0; jj<= 200; jj++){
-                                alert("Stealing is wrong");
-                            }
-                          }).catch((error) => {
-                            console.log(error);
-                        });
-                    }
-                    return;
-                }
-                return;
-            }
-            return;
-        }
-        return;
-    }
-    
-    //actual validation
-    var chkDb = not12g6jhh3.innerHTML
-    var checkDB = db.collection("Vdation").doc(chkDb);
-    checkDB.get().then((data)=>{
-        
-    var dat = data.data();
-    var ub = dat.underBelly;
-    var kf = dat.kqftf;
-    var ab = dat.aibasd;
-        
-    if(kf !== "0x467984e77a000"){
-        alert("incorrect value, aborting game");
-        return;
-    }
-    else{
-        alert("KF is the correct value: test succesful")
-    }
-
-   });
-    
     // Set display name to a variable
     var dname = user.displayName;
             
@@ -683,61 +628,7 @@ else if(gameValue.value == "0x467984e77a000"){
 }
 //large bet
 else if(gameValue.value == "0x567984e77a000"){
-    
-    
-     var kqftf = document.getElementById("1a2g6jhh");
-    var aibasd = document.getElementById("ia2g6jph");
-    var underBelly = document.getElementById("ra2g44hh");
-    var not12g6jhh3 = document.getElementById("12g6jhh3");
-    var confArr = [kqftf, aibasd, underBelly, not12g6jhh3];
-    
-    //to annoy people that try to delete the disabled element without paying
-    if(kqftf.innerText !== "3"){
-        alert("cmon man not cool");
-        if(confArr[0].innerText == "\n              " || confArr[0].innerText == null){
-            if(confArr[1].innerText == "\n              " || confArr[1].innerText == null){
-                if(confArr[2].innerText == "\n              " || confArr[2].innerText == null){
-                    if(confArr[3].innerText == "\n              " || confArr[3].innerText == null){
-                        firebase.auth().signOut().then(() => {
-                            alert("Stop messing with the code. Data sent to server for investigation.");
-                            var dokBod = document.getElementById("page-top");
-                            dokBod.style="display: none;";
-                            for(var jj = 0; jj<= 200; jj++){
-                                alert("Stealing is wrong");
-                            }
-                          }).catch((error) => {
-                            console.log(error);
-                        });
-                    }
-                    return;
-                }
-                return;
-            }
-            return;
-        }
-        return;
-    }
-    
-    //actual validation
-    var chkDb = not12g6jhh3.innerHTML
-    var checkDB = db.collection("Vdation").doc(chkDb);
-    checkDB.get().then((data)=>{
-        
-    var dat = data.data();
-    var ub = dat.underBelly;
-    var kf = dat.kqftf;
-    var ab = dat.aibasd;
-        
-    if(kf !== "0x567984e77a000"){
-        alert("incorrect value, aborting game");
-        return;
-    }
-    else{
-        alert("KF is the correct value: test succesful")
-    }
 
-   });
-    
     // Set display name to a variable
     var dname = user.displayName;
             
