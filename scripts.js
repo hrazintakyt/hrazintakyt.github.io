@@ -93,7 +93,8 @@ profBtn.onclick = (function(){
             // chessTab.style= ( "display: none;" );
             var stakingInterfaceD = document.getElementById("stakingInterface");
             stakingInterfaceD.style =("display: none;");
-
+            var gameTime = document.getElementById("gameTimerDiv");
+            gameTime.style = ("display: none;");
 
             //now we populate the profile.
             //console.log(user);
@@ -176,13 +177,18 @@ profBtn.onclick = (function(){
                 //using a different div to avoid triggering mutation observer rewriting image data as null
                 var myProfPic = document.getElementById("myProfPic2");
                 var childImg = document.createElement("img");
+                
+                if(myProfPic.children[0].src !== imgUrl){
                 childImg.src = imgUrl;
                 childImg.style = "height: 180px; width: 160px; border: 2px solid black;";
                 myProfPic.appendChild(childImg);
                 myProfPic.style = "position: relative; margin-left: 2vw;";
                 var inpt = document.getElementById("inputFileToLoad");
                 inpt.style = "margin-left: 2vw;";
-                
+                }else{
+                //do nothing
+                    console.log(myProfPic.children[0]);
+                }
                 
 
   });
