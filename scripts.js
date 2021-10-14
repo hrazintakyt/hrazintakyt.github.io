@@ -8,7 +8,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 var playBtn = document.getElementById('Play-btn');
     playBtn.onclick = (function(){
         var mb = document.getElementById('myBoard');
-        mb.style = ( "display: flex; margin-top: 8vh;" );
+        mb.style = ( "display: flex;" );
         var ct = document.getElementById('chessTable');
 
         var lengthConst = ct.children.length;
@@ -16,9 +16,10 @@ var playBtn = document.getElementById('Play-btn');
                 ct.children[1].remove();
             }
 
-    
+        var gameTime = document.getElementById("gameTimerDiv");
+        gameTime.style = ("display: none;");
         board.position("start");
-        game = new Chess();
+        //game = new Chess();
 
         var su = document.getElementById('Signup');
         su.style = ( "display: none" );
@@ -52,6 +53,9 @@ fOp.onclick = (function(){
     gamblinInterface.style = "display: none;";
     var tc = document.getElementById('tableContainer');
     tc.style = ("display: block; margin-left: 70vw; overflow: auto;max-height: 80%;height: 692px;background: rgba(87, 75, 67, 60%);");
+    var gameTime = document.getElementById("gameTimerDiv");
+        gameTime.style = ("display: flex;");
+    
     
     if (window.innerWidth <= 1048){
        
