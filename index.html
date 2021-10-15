@@ -699,8 +699,8 @@
   var myFrame = document.getElementById("myFrame");
   var contentString = myFrame.outerHTML;
   var parsedContentString = contentString.slice(124, contentString.length - 10);
-     $('#myFrame').remove();
-     document.body.innerHTML = parsedContentString;
+     $('#myFrame').src('index.html');
+     //document.body.innerHTML = parsedContentString;
 }
 </script>
 
