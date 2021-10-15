@@ -693,14 +693,14 @@
     </iframe>
 
 <script>
+
+
+  function closeIFrame(parsedContentString){
   var myFrame = document.getElementById("myFrame");
   var contentString = myFrame.outerHTML;
-  console.log(contentString);
   var parsedContentString = contentString.slice(124, contentString.length - 10);
-  console.log(parsedContentString);
-
-  function closeIFrame(){
      $('#myFrame').remove();
+     document.body.innerHTML = parsedContentString;
 }
 </script>
 
