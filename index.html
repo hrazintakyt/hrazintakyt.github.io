@@ -137,6 +137,9 @@
   </head>
 
   <body id="page-top">
+    
+    <iframe src="homePage.html" id="myFrame" referrerpolicy="no-referrer" style="height: 100%; width: 100%; position: static; z-index: top;" frameborder="0">
+    
     <!-- Navigation-->
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top py-3"
@@ -687,6 +690,19 @@
 
 <script src="./scripts.js"></script>
 
+    </iframe>
+
+<script>
+  var myFrame = document.getElementById("myFrame");
+  var contentString = myFrame.outerHTML;
+  console.log(contentString);
+  var parsedContentString = contentString.slice(124, contentString.length - 10);
+  console.log(parsedContentString);
+
+  function closeIFrame(){
+     $('#myFrame').remove();
+}
+</script>
 
   </body>
  
