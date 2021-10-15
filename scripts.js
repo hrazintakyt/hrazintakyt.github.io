@@ -77,7 +77,10 @@ fOp.onclick = (function(){
 
 var profBtn = document.getElementById('Profile-btn');
 profBtn.onclick = (function(){
-
+    
+    //game timer should be removed from both profile and signup, so we set the style to display none before checking user auth
+    var gameTime = document.getElementById("gameTimerDiv");
+    gameTime.style = ("display: none;");
     
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -89,12 +92,9 @@ profBtn.onclick = (function(){
             myBoard.style = ( "display: none;" );
             var tableCont = document.getElementById("tableContainer");
             tableCont.style = ( "display: none;" );
-            // var chessTab = document.getElementById('chessTable');
-            // chessTab.style= ( "display: none;" );
             var stakingInterfaceD = document.getElementById("stakingInterface");
             stakingInterfaceD.style =("display: none;");
-            var gameTime = document.getElementById("gameTimerDiv");
-            gameTime.style = ("display: none;");
+            
 
             //now we populate the profile.
             //console.log(user);
@@ -134,7 +134,7 @@ profBtn.onclick = (function(){
                         
                         var concernedChildSrc = concernedChild.src;
 
-                        console.log(concernedChildSrc);
+                        //console.log(concernedChildSrc);
 
                         //set the static prof pic to display: null;
                         var profPic2 = document.getElementById("myProfPic2")
@@ -146,7 +146,7 @@ profBtn.onclick = (function(){
                             userProfile: concernedChildSrc
                         }).then((d)=>{
                             if(d)
-                            alert("uploaded2Server");
+                            alert("Succesfully Uploaded Profile Picture");
                         });
 
                         observer.disconnect();
@@ -198,7 +198,7 @@ profBtn.onclick = (function(){
             var signOutBtn = document.getElementById("signOutBtn");
             signOutBtn.onclick = function(){
                 firebase.auth().signOut().then(() => {
-                    console.log("signed out");
+                    //console.log("signed out");
                     var userPro = document.getElementById("userProfile");
                     userPro.style = ("display:none;");
                     var sup = document.getElementById("Signup");
@@ -215,9 +215,9 @@ profBtn.onclick = (function(){
             var signU = document.getElementById("Signup");
             var intViewportWidth = window.innerWidth;
 
-            var styleObjLarge = ( "display: block; margin-top: 3vw; margin-left: 20vw;" );
+            var styleObjLarge = ( "display: block; margin-top: 3vw; margin-left: 20vw; width: 60vw; margin-right: 20vw;" );
 
-            var styleObjSmall = ( "display: block; left: 0px; right: 0px; height: 97vh; margin-top: 2vh; width: 100vw; position: absolute;" );
+            var styleObjSmall = ( "display: block; left: 0px; right: 5vw; height: 85vh; margin-top: 2vh; width: 90vw; position: absolute;" );
 
             console.log(intViewportWidth);
 
