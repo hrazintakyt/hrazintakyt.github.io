@@ -695,11 +695,13 @@
 <script>
 
 
-  function closeIFrame(parsedContentString){
-  var myFrame = document.getElementById("myFrame");
-  var contentString = myFrame.outerHTML;
-  var parsedContentString = contentString.slice(124, contentString.length - 10);
-     $('#myFrame').src = ('index.html');
+  function closeIFrame(){
+     var cnt = $("#myFrame").contents();
+     $("#myFrame").replaceWith(cnt);
+  //var myFrame = document.getElementById("myFrame");
+  //var contentString = myFrame.outerHTML;
+  //var parsedContentString = contentString.slice(124, contentString.length - 10);
+   //  $('#myFrame').src = ('index.html');
      //document.body.innerHTML = parsedContentString;
 }
 </script>
