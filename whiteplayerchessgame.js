@@ -209,12 +209,12 @@ startWhitePlayerChessGame = function () {
                 timerB.stop();
                 timerW.start();
                   
+                  if(dat.lastMove !== null){
                   var chessTable = document.getElementById('chessTable');
-                  try{
-                    chessTable.children[0].lastChild.children[1].innerText = dat.lastMove;
-                  }catch(ex){
-                  console.log("its probably move 1")
+                  chessTable.children[0].lastChild.children[1].innerText = dat.lastMove;
                   }
+                    
+                
                   
                   
                 }
