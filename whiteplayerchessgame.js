@@ -152,6 +152,15 @@ startWhitePlayerChessGame = function () {
                 var turn = dat.turn;
                 console.log(turn);
                 
+              //time syncro
+                var whiteTym = dat.whiteTime;
+                var blkTym = dat.blackTime;
+                var whiteClock = document.getElementById("whiteClock");
+                var blackClock = document.getElementById("blackClock");
+                whiteClock.innerHTML = whiteTym;
+                whiteGameTime = whiteTym;
+                blackClock.innerHTML = blkTym;
+                blackGameTime = blkTym;
                 
 
                
@@ -443,6 +452,9 @@ startWhitePlayerChessGame = function () {
                 var differenceString = tempGamePgn.substr(previousPgn.length, difference);
 
                 var lastMove = differenceString;
+                
+                var whiteClock = document.getElementById("whiteClock");
+                var wcp = parseInt(whiteClock.innerHTML);
 
                 var fenString = game.fen();
 
@@ -456,7 +468,8 @@ startWhitePlayerChessGame = function () {
                   fenStringData: fenString,
                   source: source,
                   turn: "b",
-                  gameOver: gameOverBool
+                  gameOver: gameOverBool,
+                  blackClock: wcp
                 })
                   .then(() => {
                     console.log("Document successfully updated!");
