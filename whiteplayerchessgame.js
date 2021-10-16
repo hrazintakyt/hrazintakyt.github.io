@@ -469,7 +469,7 @@ startWhitePlayerChessGame = function () {
                   source: source,
                   turn: "b",
                   gameOver: gameOverBool,
-                  blackClock: wcp
+                  whiteTime: wcp
                 })
                   .then(() => {
                     console.log("Document successfully updated!");
