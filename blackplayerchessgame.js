@@ -153,7 +153,15 @@ startBlackPlayerChessGame = function () {
                 console.log(dat);
                 var turn = dat.turn;
                 
-               
+               //time syncro test
+                var whiteTym = dat.whiteTime;
+                var blkTym = dat.blackTime;
+                var whiteClock = document.getElementById("whiteClock");
+                var blackClock = document.getElementById("blackClock");
+                whiteClock.innerHTML = whiteTym;
+                whiteGameTime = whiteTym;
+                blackClock.innerHTML = blkTym;
+                blackGameTime = blkTym;
                 
 
                
