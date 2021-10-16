@@ -670,6 +670,8 @@ startWhitePlayerChessGame = function () {
                 (orientation === 'black' && piece.search(/^b/) === -1)) {
                 return false
               }
+              
+              board.position(game.fen())
 
             }
 
