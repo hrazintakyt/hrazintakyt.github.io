@@ -447,6 +447,9 @@ startBlackPlayerChessGame = function () {
                 var differenceString = tempGamePgn.substr(previousPgn.length, difference);
 
                 var lastMove = differenceString;
+                
+                var blackClock = document.getElementById("blackClock");
+                var bcp = parseInt(blackClock.innerHTML);
 
                 var fenString = game.fen();
 
@@ -459,7 +462,8 @@ startBlackPlayerChessGame = function () {
                   fenStringData: fenString,
                   source: source,
                   turn: "w",
-                  gameOver: gameOverBool
+                  gameOver: gameOverBool,
+                  blackTime: bcp
                 })
                   .then(() => {
                     console.log("Document successfully updated!");
