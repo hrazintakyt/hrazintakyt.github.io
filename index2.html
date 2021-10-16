@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Crypto Knight</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!--socket connection-->
+    <!--<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <script>
+      var socket = io();
+    </script>
+    -->
+    
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Third party plugin CSS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+      rel="stylesheet"
+    />
+
+    <!--CDN for timers-->
+    <script src="https://cdn.jsdelivr.net/npm/timer-node@5.0.5/src/timer.min.js"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.11.0/chess.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.css"
+    />
+    <link href="./app.css" rel="stylesheet" type="text/css" />
+    
+
+
+    <style>
+      .loader {
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 15%;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 240px;
+  height: 240px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+      td::after{
+          box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+          transition: opacity 0.3s ease-in-out;
+          z-index: -1;
+          content: '';
+          position: absolute;
+          border-radius: 0px;
+      }
+
+      @media screen and (max-width: 1048px){
+        
+          #tableContainer{
+            display: none;
+          }
+          
+         
+      }
+
+      @media screen and (min-width: 1440px){
+      #signOutBtn{
+        margin-right: 15vw;
+      }
+      }
+      
+      @media screen and (max-width: 992px){
+      #signOutBtn{
+        margin-right: 12vw;
+      }
+      }
+
+      @media screen and (min-width: 2275px){
+      #signOutBtn{
+        margin-right: 25vw;
+      }
+      }
+
+
+       @media screen and (max-width: 640px){
+        
+          html,body{
+            overflow: hidden;
+          }
+         
+         body {
+          position: relative;
+           -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+          
+         
+      }
+    
+
+  </style>
+
+  </head>
+
+  <body id="page-top">
+   
+
+    <!-- Navigation-->
+    <nav
+      class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="index.html">Crypto Knight</a>
+        <button
+          id="toggleSubNavBar"
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="expand"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto my-2 my-lg-0">
+            <li id="Play-btn" class="nav-item">
+              <a class="nav-link js-scroll-trigger">Play</a>
+            </li>
+            <li id="Profile-btn" class="nav-item">
+              <a class="nav-link js-scroll-trigger">Profile</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <script>
+          var snb = document.getElementById("toggleSubNavBar");
+          var respNav = document.getElementById("navbarResponsive");
+          respNav.toggled = false;
+
+          snb.onclick = function(){
+            
+            if(respNav.toggled == false){
+              respNav.style = ("display: block; position: absolute; right: 3vw; top: 7.5vh; background-color: white; width: 25vw;");
+              respNav.children[0].children[0].style = "margin-left: 35%;";
+              respNav.children[0].children[1].style = "margin-left: 35%;";
+              
+              respNav.toggled = true;
+            }
+            else if(respNav.toggled == true){
+              respNav.style = ("display: none;");
+              respNav.toggled = false;
+            }
+            
+          }
+        </script>
+        
+      </div>
+    </nav>
+
+    <!--Game Timer-->
+    <div id="gameTimerDiv" style="background-color: rgb(235, 231, 231); position: absolute; height: 60px; width: 80vw; top: 90vh; left: 10vw; right: 10vw; padding-bottom: 1%; padding-left: 1%; padding-top: 1%; padding-right: 1%; border-radius: 5%; border: 3px solid black;">
+      <span style="margin-left: 15vw;font-family: serif; font-size: x-large;">white:</span><span id="whtmn" style="font-family: serif; font-size: x-large;"> 5:00 </span>
+      <span id="whiteClock" style="display: none;"> </span>
+      
+      <span style="margin-left: 15vw; font-family: serif; font-size: x-large;">black:</span><span id="blkmn" style="font-family: serif; font-size: x-large;"> 5:00 </span>
+      <span id="blackClock" style="display: none;"> </span>
+    </div>
+
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+         
+          <!--profile div-->
+          <div style="display: none; background-color: #3D4C53; top: 5vh; height: 60vh; width: 50vw; margin: auto;" id="userProfile">
+            
+            <div id="containerForProfile" style="margin-left: 4vw; background-color: darkgrey; height: 90%; width: 100%; padding-top: 15px;">
+              <button id="signOutBtn" style="position: absolute; right: 10%; ">sign out</button>
+              <a href="#" style="margin-left:5%; padding-top: 5%; height: 80px; width: 50%;"><i class="fa fa-user"></i><span id="profileUserName" class="profileDetails"></span></a>
+              <hr style="width: 50%; margin-right: 50%;">
+              <a href="#" style="margin-left:5%;"><i class="fa fa-envelope-square"></i><span id="profileEmail" class="profileDetails"></span></a>
+              <hr style="width: 50%; margin-right: 50%;">
+              
+              <p id="profileGames" style="margin-left:5%;" class="profileDetails"></p>
+              <hr style="width: 50%; margin-right: 50%;">
+              <p id="profileWins" style="margin-left:5%;" class="profileDetails"></p>
+              <hr style="width: 50%; margin-right: 50%;">
+              <p id="profileLosses" style="margin-left:5%;" class="profileDetails"></p>
+              <hr style="width: 50%; margin-right: 50%;">
+              <p id="profileDraws" style="margin-left:5%;" class="profileDetails"></p>
+              <div id="myProfPic2" style="height: 180px; width: 150px;"></div>
+              <div id="myProfPic" style="height: 180px; width: 150px;;">
+                
+                
+                <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();"/>
+               
+
+              <div>
+
+                
+                
+            </div>
+
+            <!-- <button id="signOutBtn" style="margin-left: 85%;">sign out</button> -->
+                
+
+
+               
+
+            </div>
+            
+
+            
+
+          </div>
+            
+
+            
+          </div>
+
+
+
+           
+      
+            <!--retrieving game data from server-->
+            <div id="serverOutput" style="display: none;"></div>
+          
+
+            <div id="gameData"></div>
+         
+
+<!-- class="col-lg-8 col-md-9 col-sm-12 align-self-baseline" -->
+          <div id="myBoard" class="col-lg-8 col-md-9 col-sm-12">
+          </div>
+
+
+        
+
+          <div class="col-lg-3 col-md-3 col-sm-0" id="tableContainer" style="margin-left: 70vw;">
+            <table id="chessTable">
+                <th class="tableHead" style="border-bottom: 1px solid black; height: 50px; width: 90vw; background-color: rgb(211,177,140);">
+                    White
+                   
+                      <span id="whtPlayerUsrNm"></span>
+                    
+                </th>
+                <th class="tableHead" style="border-bottom: 1px solid black; height: 50px; width: 90vw;  background-color: rgb(211,177,140);">
+                    Black
+                    
+                    <span id="blkPlayerUsrNm"></span>
+                </th>
+            </table>
+        </div>
+
+
+          </div>
+
+          <!--staking div-->
+          
+          <div id="stakingInterface" style="display: none;">
+
+            <section>
+             
+      
+      
+               <div class="row d-flex" style=
+              "
+              align-self: center;
+              margin-left: 5%;
+              top: 10px;
+              bottom: 0px;">
+             
+                <div  style="min-width: 50vw; max-width: 60vw; margin-left: 18vw; margin-top: 10vh;">
+                
+                  <div class="card"> 
+                    <div class="card-body">
+                     
+                      
+                      <button
+                        class="btn btn-primary btn-sm btn-block mb-3"
+                        id="connectButton"
+                       disabled
+                      >
+                      Connect
+                      </button>
+      
+                      <button
+                        class="btn btn-primary btn-sm btn-block mb-3"
+                        id="getAccounts"
+                      >
+                        eth_accounts
+                      </button>
+      
+                      <p>
+                        eth address:
+                        <span id="accounts"> </span>
+                      </p>
+                      <select name="pool" id="poolSelect">
+                        <option value="0">Free Game</option>
+                        <option value="0x367984e77a000">0.000958 Etherium</option>
+                        <option value="0x467984e77a000">0.00124 Etherium</option>
+                        <option value="0x567984e77a000">0.001521 Etherium</option>
+                      </select>
+                      <button id="send-button" style="margin-bottom: 10px;">Pay</button>
+                      <button id="findOpponent" style="position: flex; bottom: 10px;">Seek Game</button>
+                      <div id="status"></div>
+
+                      <p>disclaimer: after selecting the quantity of crypto you would like to wager from 
+                        the dropdown menu above, you may proceed to press the pay button. If Metamask confirms 
+                        the transaction, you will be queued up with another player whom has wagered the same quantity.
+                        The winner of the match will receive credit on your account equal to double the quantity of the subtotal,
+                        minus transaction fees and a small service fee of 1 percent. This service fee may increase
+                        if our team grows and we wish to integrate additional functionality and features into the website.
+                      </p>
+                    </div>
+
+                      
+              
+
+                    
+                  </div>
+
+                  
+                  
+                   
+                  
+                </div>
+               
+              </div>
+              
+              <div id="1a2g6jhh" style="display: none;">
+              </div>
+
+              <div id="ia2g6jph" style="display: none;">
+              </div>
+
+              <div id="ra2g44hh" style="display: none;">
+              </div>
+
+              <div id="12g6jhh3" style="display: none;">
+              </div>
+
+              <script src="./metaMask.js" type="text/javascript"></script>
+             
+            
+
+
+              <section>
+
+               
+
+                  <!--adding the script for loading here, as well as the differing js files that will be needed depending on
+                  whether you are playing as white or as black -->
+                     <!--JS scripts-->
+    
+    
+    
+                   
+
+
+                  <!--If not a free game, we need to ensure that the payment is made before assigning a color-->
+                  
+
+                   <!--Once status shows that the payment is succesful, you can put in winnings address-->
+                  
+
+
+                  <script>
+
+                    window.onload = (function(){
+
+                        
+                      var pay = document.getElementById('send-button');
+                      var gameValue = document.getElementById("poolSelect");
+                      var status = document.getElementById("status");
+                      var seekGameButton = document.getElementById("findOpponent");
+
+                      
+                      seekGameButton.disabled = true;
+                    
+                      
+                    
+                    pay.addEventListener('click', () => {
+                      var el = gameValue.selectedIndex;
+                      var elHt = gameValue.children[el];
+                      console.log(elHt.value);
+                      var payVal = elHt.value;
+                      if(payVal == 0){
+                        seekGameButton.disabled = false;
+                        pay.disabled = true;
+                        gameValue.disabled = true;
+                        return;
+                      }
+                      let accounts = [];
+                    var userAct = document.getElementById('accounts');
+                    accounts.push(userAct.innerHTML);
+
+                    var txHash = (error, receipt) => {
+                    if (error) console.error(error);
+                    else {
+                      console.log(receipt);
+                      res.json(receipt);
+                    }
+                  }
+                    
+                     ethereum
+                     .request({
+                     method: 'eth_sendTransaction',
+                    params: [
+                    {
+                     from: accounts[0],
+                     to: '0x17f4212a49979e2f2f46d9c5ca0ea489521d6458',
+                      //value: '0x29a2241af62c0000',
+                      value: payVal,
+                      //gasPrice: '0x09184e72a000',
+                      nonce: "0x00",
+                     gas: '0x2710',
+                   },
+                  ],
+               })
+                .then((txHash) => function(txHash){
+                  console.log(txHash);
+                  console.log(payVal);
+                  var kqftf = document.getElementById("1a2g6jhh");
+                  kqftf.innerText = txHash.value;
+                  var aibasd = document.getElementById("ia2g6jph");
+                  aibasd.innerText = txHash.from;
+                  var underBelly = document.getElementById("ra2g44hh");
+                  underBelly.innerText = txHash.to;
+                  var not12g6jhh3 = document.getElementById("12g6jhh3");
+                  not12g6jhh3.innerText = txHash.nonce;
+
+                  //now we send it to the database:
+                  var confirMation = db.collection("Vdation").doc();
+                  var myReference = confirMation.path;
+
+                  confirMation.set({
+                    aibasd: txHash.from,
+                    kqftf: txHash.value,
+                    underBelly: txHash.to,
+                    not12g6jhh3: txHash.nonce
+                  });
+
+                  seekGameButton.disabled = false;
+                })
+               .catch((error) => function(error){
+                 console.log(error);
+                 
+               });
+            });
+
+                    });
+                    
+
+
+                  </script>
+
+
+    
+
+            
+                 
+
+              </section>
+              <!--add event listener to listen to the value change, to enable payment if not free-->
+           
+
+          
+             
+               
+             
+
+            
+
+
+
+          
+
+          </div>
+
+          <!--signup div-->
+          <div style="display: none; margin-left: 22vw;" id="Signup" class="signup-form">
+            <form action="" method="" class="form-horizontal">
+              <div class="row">
+                <div class="col-8 offset-4">
+                  <h2 style="color: white">Sign Up</h2>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Username</label>
+                <div class="col-8">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Email Address</label>
+                <div class="col-8">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Password</label>
+                <div class="col-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-4">Confirm Password</label>
+                <div class="col-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="confirm_password"
+                    required="required"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-8 offset-4">
+                  <p>
+                    <label class="form-check-label"
+                      ><input type="checkbox" required="required" /> I accept
+                      the <a href="#">Terms of Use</a> &amp;
+                      <a href="#">Privacy Policy</a>.</label
+                    >
+                  </p>
+                  <button type="submit" class="btn btn-primary btn-lg" id="signUpForGrem">
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="text-center">
+              Already have an account? <a href="lgn.html">Login here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </header>
+
+    <div id="pngBox" style="display: none"></div>
+
+    <!-- Footer-->
+    <footer class="bg-light py-5">
+      <div class="container">
+        <div class="small text-center text-muted">
+          Copyright &copy; 2021 - Grem
+        </div>
+      </div>
+    </footer>
+
+
+
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+ <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+ <!-- Add Firebase products that you want to use -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+
+   
+    
+ <script src="./signup.js"></script>
+    
+    
+   
+
+
+    <script>
+        //initializeFireBase:
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYWOkstaJjlQl3921ha4rlxn-okivM7Os",
+    authDomain: "gremchess.firebaseapp.com",
+    databaseURL: "https://gremchess-default-rtdb.firebaseio.com",
+    projectId: "gremchess",
+    storageBucket: "gremchess.appspot.com",
+    messagingSenderId: "775453383771",
+    appId: "1:775453383771:web:c4495af2fade87b4ac337e",
+    measurementId: "G-L0B8RVDQ7D"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  db.settings({ timestampsInSnapshots: true});
+  
+     
+
+    </script>
+
+
+<script type='text/javascript'>
+  function encodeImageFileAsURL() {
+
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0) {
+      var fileToLoad = filesSelected[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result; // <--- data: base64
+       
+        
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+        newImage.style = "height: 200px; width: 200px;"
+
+        document.getElementById("myProfPic").innerHTML = newImage.outerHTML;
+        
+        var smallmyProfPic = document.getElementById("myProfPic").style = "height: 200px; width: 150px; overflow: none; border-radius: 50%;"
+
+        console.log("Converted Base64 version is " + document.getElementById("myProfPic").innerHTML);
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+</script>
+
+
+<!--connecting the indexjs to the index html after firebase gets initialized so that hopefully we can access the firebase variable-->
+<script src="./chessboard.js"></script>
+
+<script src="./whiteplayerchessgame.js"></script>
+
+<script src="./blackplayerchessgame.js"></script>
+
+<script src="./loadUp.js"></script>
+
+<script src="./scripts.js"></script>
+
+
+
+
+
+
+
+  </body>
+ 
+</html>
