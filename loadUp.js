@@ -85,7 +85,9 @@ if(gameValue.value == 0){
                                 turn:"w",
                                 gameOver: false,
                                 gameValue: gameValue.value,
-                                time: 1800
+                                time: 1800,
+                                whiteTime: 1800,
+                                blackTime: 1800
                             }).then(function() {
                                 
                                 //Here we access the collection freeWaitList and remove both players:
