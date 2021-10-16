@@ -86,8 +86,8 @@ if(gameValue.value == 0){
                                 gameOver: false,
                                 gameValue: gameValue.value,
                                 time: 1800,
-                                whiteTime: 1800,
-                                blackTime: 1800
+                                whiteTime: 300,
+                                blackTime: 300
                             }).then(function() {
                                 
                                 //Here we access the collection freeWaitList and remove both players:
