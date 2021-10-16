@@ -174,8 +174,13 @@ startBlackPlayerChessGame = function () {
                       //if the white timer is running and the change turn event gets triggered, stop the white timer, and start the black timer
                       timerB.stop();
                       timerW.start();
+                      
+                    var chessTable = document.getElementById('chessTable');
+                    chessTable.children[0].lastChild.children[1].innerText = dat.lastMove;
+                      
                   }else if(timerW.isRunning() == false){
                     timerW.start();
+                    
                   }
   
                   return;
@@ -187,6 +192,19 @@ startBlackPlayerChessGame = function () {
                 if(turn == "b"){
                   timerW.stop();
                   timerB.start();
+                  
+                  
+                   var chessTable = document.getElementById('chessTable');
+                    var tr = document.createElement("tr");
+                    var tData1 = document.createElement('td');
+                    var tData2 = document.createElement('td');
+                    tr.appendChild(tData1);
+                    tr.appendChild(tData2);
+                    //tbody appends the tr
+                    chessTable.children[0].append(tr);
+                    chessTable.children[0].lastChild.children[0].innerText = dat.lastMove;
+                  
+                  
                 }
                 
                 var currentFenString = dat.fenStringData;
