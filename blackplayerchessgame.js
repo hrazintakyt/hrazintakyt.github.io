@@ -69,7 +69,7 @@ startBlackPlayerChessGame = function () {
                       blackGameTime = gameTime;
                       domOut.innerHTML = whiteGameTime;
                       tblack.innerHTML = blackGameTime;
-                      stopInterval(whiteTurn);
+                      game.clear();
                       stopInterval(blackTurn);
           
                     }
@@ -111,6 +111,7 @@ startBlackPlayerChessGame = function () {
                         blackGameTime = gameTime;
                         domOut.innerHTML = whiteGameTime;
                         tblack.innerHTML = blackGameTime;
+                        game.clear();
                         stopInterval(whiteTurn);
                         stopInterval(blackTurn);
                         
