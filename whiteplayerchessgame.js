@@ -64,14 +64,15 @@ startWhitePlayerChessGame = function () {
               if(timerB.isRunning() == true){
 
                   if(blackGameTime === -1){
-                      alert("you win");
+                      
                       timerW.stop();
                       timerB.stop();
                       whiteGameTime = gameTime;
                       blackGameTime = gameTime;
                       domOut.innerHTML = whiteGameTime;
                       tblack.innerHTML = blackGameTime;
-                      stopInterval(whiteTurn);
+                      game.clear();
+                      alert("you win");
                       stopInterval(blackTurn);
           
                     }
@@ -106,15 +107,15 @@ startWhitePlayerChessGame = function () {
                 if(timerW.isRunning() == true)
                 {
                     if(whiteGameTime === -1){
-                        alert("you lose");
+                        
                         timerW.stop();
                         timerB.stop();
                         whiteGameTime = gameTime;
                         blackGameTime = gameTime;
                         domOut.innerHTML = whiteGameTime;
                         tblack.innerHTML = blackGameTime;
-                        stopInterval(whiteTurn);
-                        stopInterval(blackTurn);
+                        game.clear();
+                        alert("you lose");
                         
                     }
                     else{
