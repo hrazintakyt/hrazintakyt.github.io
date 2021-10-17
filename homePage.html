@@ -30,7 +30,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Play</a></li>
+                        <li class="nav-item"><a class="nav-link" id="navPlay" href="#">Play</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Crypto price</a></li>
                         
@@ -160,7 +160,12 @@
            var playBtn = document.getElementById('playNowBtn');
            playBtn.onclick = (function(){
             window.parent.closeIFrame();
-           })
+           });
+           var playTag = document.getElementById('navPlay');
+           playTag.onclick = (function(){
+            window.parent.closeIFrame();
+           });
+           
        </script>
     </body>
 </html>
