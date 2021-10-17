@@ -178,7 +178,7 @@ startBlackPlayerChessGame = function () {
                     var chessTable = document.getElementById('chessTable');
                     var moveToParse = dat.lastMove;
                     var spotToCut = moveToParse.lastIndexOf('.');
-                    var newString = moveToParse.slice(spotToCut);  
+                    var newString = moveToParse.slice(spotToCut + 1);  
                     chessTable.children[0].lastChild.children[1].innerText = newString;
                       
                   }else if(timerW.isRunning() == false){
