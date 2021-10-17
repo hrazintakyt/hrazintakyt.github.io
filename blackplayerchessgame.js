@@ -176,7 +176,10 @@ startBlackPlayerChessGame = function () {
                       timerW.start();
                       
                     var chessTable = document.getElementById('chessTable');
-                    chessTable.children[0].lastChild.children[1].innerText = dat.lastMove;
+                    var moveToParse = dat.lastMove;
+                    var spotToCut = moveToParse.lastIndexOf('.');
+                    var newString = moveToParse.slice(spotToCut);  
+                    chessTable.children[0].lastChild.children[1].innerText = newString;
                       
                   }else if(timerW.isRunning() == false){
                     timerW.start();
