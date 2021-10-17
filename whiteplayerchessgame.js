@@ -211,7 +211,11 @@ startWhitePlayerChessGame = function () {
                   
                   if(dat.lastMove !== null){
                   var chessTable = document.getElementById('chessTable');
-                  chessTable.children[0].lastChild.children[1].innerText = dat.lastMove;
+                  var moveToParse = dat.lastMove;
+                  var spotToCut = moveToParse.lastIndexOf('.');
+                  var newString = moveToParse.slice(spotToCut + 1);  
+                  chessTable.children[0].lastChild.children[1].innerText = newString;
+                  
                   }
                     
                 
