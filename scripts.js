@@ -202,7 +202,7 @@ profBtn.onclick = (function(){
                     var userPro = document.getElementById("userProfile");
                     userPro.style = ("display:none;");
                     var sup = document.getElementById("Signup");
-                    sup.style = ("display: block; margin-left: 20vw; margin-top: 3vw;");
+                    sup.style = ("display: flex; margin: auto; margin-top: 3vw;");
                     
                   }).catch((error) => {
                     console.log(error);
@@ -215,7 +215,7 @@ profBtn.onclick = (function(){
             var signU = document.getElementById("Signup");
             var intViewportWidth = window.innerWidth;
 
-            var styleObjLarge = ( "display: block; margin-top: 3vw; margin-left: 20vw; width: 60vw; margin-right: 20vw;" );
+            var styleObjLarge = ( "display: flex; margin-top: 3vw; margin: auto; width: 60vw;" );
 
             var styleObjSmall = ( "display: block; left: 0px; right: 5vw; height: 85vh; margin-top: 2vh; width: 90vw; position: absolute;" );
 
