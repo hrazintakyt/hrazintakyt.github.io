@@ -249,8 +249,9 @@
                     console.log(request);
                     if(request.status === 200 ){
                     var userChessData = JSON.parse(request.response);
+                    console.log(userChessData);
                     var timeStamp = userChessData.chess_blitz.last.date;
-                    var date = new Date(timestamp * 1000);
+                    var date = new Date(timeStamp * 1000);
                     console.log(date);
                     console.log(userChessData.chess_blitz.last.rating)
                     }else{
