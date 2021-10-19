@@ -260,8 +260,8 @@
                                 user.updateProfile({
                                 lastLiveGame: dateL,
                                 blitzRating: blitzR
-                                }).then(function() {
-                                  console.log("then hit");
+                                }).then(function(user) {
+                                  console.log(user);
                                   var elo = document.getElementById("ifNoElo");
                                   elo.innerHTML = "last live game: " + user.lastLiveGame + "blitzRating: " + user.blitzRating;
 
