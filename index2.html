@@ -257,13 +257,15 @@
                                 var dateL = new Date(timeStamp * 1000);
                                 var blitzR = userChessData.chess_blitz.last.rating;
                                 const user = firebase.auth().currentUser;
-                                console.log(user);
+                                console.log(user.lastLiveGame);
                                 console.log("=======================");
                                 user.updateProfile({
                                 lastLiveGame: dateL,
                                 blitzRating: blitzR
-                                }).then(function(user) {
+                                }).then(function() {
+                                  const user = firebase.auth().currentUser;
                                   console.log(user);
+                                  console.log(user.lastLiveGame);
                                   var elo = document.getElementById("ifNoElo");
                                   elo.innerHTML = "last live game: " + user.lastLiveGame + "blitzRating: " + user.blitzRating;
 
