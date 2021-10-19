@@ -262,10 +262,10 @@
                                 myChessDB.set({
                                 lastLiveGame: dateL,
                                 blitzRating: blitzR
-                                 }).then(function(data) {
-                                 
+                                 }).then(function() {
+                                  
                                   var elo = document.getElementById("ifNoElo");
-                                  elo.innerHTML = "last live game: " + data.lastLiveGame + "blitzRating: " + data.blitzRating;
+                                  elo.innerHTML = "last live game: " + dateL + "blitzRating: " + blitzR;
 
                                   var ratingBtn = document.getElementById("sccun");
                                   ratingBtn.style = "display: none;";
