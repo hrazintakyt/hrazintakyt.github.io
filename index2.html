@@ -242,46 +242,43 @@
                    
                       firebase.auth().onAuthStateChanged((user) => {
                         if(user){
-                    let request = new XMLHttpRequest();
-                    var chessUsrNm = document.getElementById("ccun");
-                    var chessComUserName = chessUsrNm.value;
+                          let request = new XMLHttpRequest();
+                          var chessUsrNm = document.getElementById("ccun");
+                          var chessComUserName = chessUsrNm.value;
                     
-                    request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
-                    request.send();
-                    request.onload = () => {
-                    console.log(request);
-                    if(request.status === 200 ){
-                    var userChessData = JSON.parse(request.response);
-                    console.log(userChessData);
-                    var timeStamp = userChessData.chess_blitz.last.date;
-                    var dateL = new Date(timeStamp * 1000);
-                    var blitzR = userChessData.chess_blitz.last.rating;
+                            request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
+                            request.send();
+                            request.onload = () => {
+                              console.log(request);
+                              if(request.status === 200 ){
+                              var userChessData = JSON.parse(request.response);
+                              console.log(userChessData);
+                              var timeStamp = userChessData.chess_blitz.last.date;
+                              var dateL = new Date(timeStamp * 1000);
+                              var blitzR = userChessData.chess_blitz.last.rating;
                           
                           
-                    user.updateProfile({
-                    lastLiveGame: dateL,
-                    blitzRating: blitzR
-                    }).then(function() {
-                      console.log("then hit");
-                      var elo = document.getElementById("ifNoElo");
-                      elo.innerHTML = "last live game: " + user.lastLiveGame + "blitzRating: " + user.blitzRating;
+                                user.updateProfile({
+                                lastLiveGame: dateL,
+                                blitzRating: blitzR
+                                }).then(function() {
+                                  console.log("then hit");
+                                  var elo = document.getElementById("ifNoElo");
+                                  elo.innerHTML = "last live game: " + user.lastLiveGame + "blitzRating: " + user.blitzRating;
 
-                      var ratingBtn = document.getElementById("sccun");
-                      ratingBtn.style = "display: none;";
-                      var chessUsrNm = document.getElementById("ccun");
-                      chessUsrNm.style = "display: none;";
+                                  var ratingBtn = document.getElementById("sccun");
+                                  ratingBtn.style = "display: none;";
+                                  var chessUsrNm = document.getElementById("ccun");
+                                  chessUsrNm.style = "display: none;";
 
-                    });
+                                });
+  //closes the if
                           }
-                            else{
-                              alert("site admin error");
-                          }
+                           
                       });
                      
                       
                       
-                    }else{
-                    console.log("error")
                     }
                     
                     }
