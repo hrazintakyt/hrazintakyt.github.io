@@ -238,7 +238,7 @@
                 
                 
                 ratingBtn.onclick = function(){
-                  const user = firebase.auth().currentUser;
+                  
                    let request = new XMLHttpRequest();
                    var chessUsrNm = document.getElementById("ccun");
                    var chessComUserName = chessUsrNm.value;
@@ -256,7 +256,7 @@
                                 var timeStamp = userChessData.chess_blitz.last.date;
                                 var dateL = new Date(timeStamp * 1000);
                                 var blitzR = userChessData.chess_blitz.last.rating;
-                                
+                                const user = firebase.auth().currentUser;
                                 user.updateProfile({
                                 lastLiveGame: dateL,
                                 blitzRating: blitzR
