@@ -232,7 +232,7 @@
 
               <script>
                 
-                var chessUsrNm = document.getElementById("ccun");
+                
 
                 var ratingBtn = document.getElementById("sccun");
                 
@@ -240,7 +240,7 @@
                 ratingBtn.onclick = function(){
                   
                     let request = new XMLHttpRequest();
-
+                    var chessUsrNm = document.getElementById("ccun");
                     var chessComUserName = chessUsrNm.value;
                     alert(chessComUserName);
                     request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
