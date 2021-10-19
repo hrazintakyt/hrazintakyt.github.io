@@ -239,10 +239,13 @@
                 
                 ratingBtn.onclick = function(){
                   
+                   
+                      firebase.auth().onAuthStateChanged((user) => {
+                        if(user){
                     let request = new XMLHttpRequest();
                     var chessUsrNm = document.getElementById("ccun");
                     var chessComUserName = chessUsrNm.value;
-                    alert(chessComUserName);
+                    
                     request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
                     request.send();
                     request.onload = () => {
@@ -253,12 +256,13 @@
                     var timeStamp = userChessData.chess_blitz.last.date;
                     var dateL = new Date(timeStamp * 1000);
                     var blitzR = userChessData.chess_blitz.last.rating;
-                      firebase.auth().onAuthStateChanged((user) => {
-                        if(user){
+                          
+                          
                     user.updateProfile({
                     lastLiveGame: dateL,
                     blitzRating: blitzR
                     }).then(function() {
+                      console.log("then hit");
                       var elo = document.getElementById("ifNoElo");
                       elo.innerHTML = "last live game: " + user.lastLiveGame + "blitzRating: " + user.blitzRating;
 
