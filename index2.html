@@ -238,26 +238,25 @@
                 
                 
                 ratingBtn.onclick = function(){
-                  
+                  const user = firebase.auth().currentUser;
+                   let request = new XMLHttpRequest();
+                   var chessUsrNm = document.getElementById("ccun");
+                   var chessComUserName = chessUsrNm.value;
                    
-                      firebase.auth().onAuthStateChanged((user) => {
-                        if(user){
-                          let request = new XMLHttpRequest();
-                          var chessUsrNm = document.getElementById("ccun");
-                          var chessComUserName = chessUsrNm.value;
+                      
+                         
                     
                             request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
                             request.send();
                             request.onload = () => {
-                              console.log(request);
+                             console.log(request);
                               if(request.status === 200 ){
-                              var userChessData = JSON.parse(request.response);
-                              console.log(userChessData);
-                              var timeStamp = userChessData.chess_blitz.last.date;
-                              var dateL = new Date(timeStamp * 1000);
-                              var blitzR = userChessData.chess_blitz.last.rating;
-                          
-                          
+                                var userChessData = JSON.parse(request.response);
+                                console.log(userChessData);
+                                var timeStamp = userChessData.chess_blitz.last.date;
+                                var dateL = new Date(timeStamp * 1000);
+                                var blitzR = userChessData.chess_blitz.last.rating;
+                                
                                 user.updateProfile({
                                 lastLiveGame: dateL,
                                 blitzRating: blitzR
@@ -270,21 +269,21 @@
                                   ratingBtn.style = "display: none;";
                                   var chessUsrNm = document.getElementById("ccun");
                                   chessUsrNm.style = "display: none;";
-
+                                  //closes then func
                                 });
-  //closes the if
+                                
+                                //closes if req status
+                               }
+                              //closes req onload
+                            }
+                          //closes the click function
                           }
                            
-                      });
+                     
                      
                       
                       
-                    }
                     
-                    }
-
-                 
-                };
 
               </script>
               <div id="myProfPic2" style="height: 180px; width: 150px;"></div>
