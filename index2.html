@@ -226,8 +226,45 @@
               <p id="profileLosses" style="margin-left:5%;" class="profileDetails"></p>
               <hr style="width: 50%; margin-right: 50%;">
               <p id="profileDraws" style="margin-left:5%;" class="profileDetails"></p>
+               <p id="ifNoElo">Enter UserName Below To get your rating from chess.com</p>
+              <input id="ccun" type="text"/>
+              <button id="sccun" type="button"> Get rating </button>
+
+              <script>
+                
+                var chessUsrNm = document.getElementById("ccun");
+
+                var ratingBtn = document.getElementById("sccun");
+                
+                
+                ratingBtn.onclick = function(){
+                  
+                    let request = new XMLHttpRequest();
+
+                    var chessComUserName = chessUsrNm.value;
+                    alert(chessComUserName);
+                    request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
+                    request.send();
+                    request.onload = () => {
+                    console.log(request);
+                    if(request.status === 200 ){
+                    var userChessData = JSON.parse(request.response);
+                    var timeStamp = userChessData.chess_blitz.last.date;
+                    var date = new Date(timestamp * 1000);
+                    console.log(date);
+                    console.log(userChessData.chess_blitz.last.rating)
+                    }else{
+                    console.log("error")
+                    }
+                    
+                    }
+
+                 
+                };
+
+              </script>
               <div id="myProfPic2" style="height: 180px; width: 150px;"></div>
-              <div id="myProfPic" style="height: 180px; width: 150px;;">
+              <div id="myProfPic" style="height: 180px; width: 150px;">
                 
                 
                 <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();"/>
