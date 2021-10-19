@@ -257,6 +257,8 @@
                                 var dateL = new Date(timeStamp * 1000);
                                 var blitzR = userChessData.chess_blitz.last.rating;
                                 const user = firebase.auth().currentUser;
+                                console.log(user);
+                                console.log("=======================");
                                 user.updateProfile({
                                 lastLiveGame: dateL,
                                 blitzRating: blitzR
