@@ -251,9 +251,24 @@
                     var userChessData = JSON.parse(request.response);
                     console.log(userChessData);
                     var timeStamp = userChessData.chess_blitz.last.date;
-                    var date = new Date(timeStamp * 1000);
-                    console.log(date);
-                    console.log(userChessData.chess_blitz.last.rating)
+                    var dateL = new Date(timeStamp * 1000);
+                    var blitzR = userChessData.chess_blitz.last.rating;
+                      
+                      user.updateProfile({
+                    lastLiveGame: dateL,
+                    blitzRating: blitzR
+                    }).then(function() {
+                      var elo = document.getElementById("ifNoElo");
+                      elo.innerHTML = "last live game: " + user.lastLiveGame + "blitzRating: " + blitzRating;
+
+                      var ratingBtn = document.getElementById("sccun");
+                      ratingBtn.style = "display: none;";
+                      var chessUsrNm = document.getElementById("ccun");
+                      chessUsrNm.style = "display: none;";
+
+                    });
+                      
+                      
                     }else{
                     console.log("error")
                     }
