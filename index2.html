@@ -233,6 +233,12 @@
               <script>
                 
                 
+                var myChessDB = db.collection("ChessComData").doc(user.displayName);
+                myChessDB.get().then((snapshot) => {
+                  if(snapshot)
+                   console.log(snapshot.data());
+                });
+                
 
                 var ratingBtn = document.getElementById("sccun");
                 
