@@ -729,8 +729,12 @@
                   chessUsrNm.style = "display: none;";
                   ratingBtn.style = "display: none;";
                   console.log(lastLiveGame);
+                  var currentDate =  new Date();
+                  
                   var dateLa = new Date(lastLiveGame * 1000);
                   console.log(dateLa);
+                  var timeDifference = currentDate - dateLa;
+                  console.log(dateLa - timeDifference);
                    var elo = document.getElementById("ifNoElo");
                    elo.innerHTML = "last live game: " + dateLa +  " & blitzRating: " + blitzRating;
                 });
