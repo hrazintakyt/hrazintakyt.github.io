@@ -728,9 +728,11 @@
                   var chessUsrNm = document.getElementById("ccun");
                   chessUsrNm.style = "display: none;";
                   ratingBtn.style = "display: none;";
-                  var dateL = new Date(lastLiveGame * 1000);
+                  console.log(lastLiveGame);
+                  var dateLa = new Date(lastLiveGame * 1000);
+                  console.log(dateLa);
                    var elo = document.getElementById("ifNoElo");
-                   elo.innerHTML = "last live game: " + dateL +  " & blitzRating: " + blitzRating;
+                   elo.innerHTML = "last live game: " + dateLa +  " & blitzRating: " + blitzRating;
                 });
 
     }else{
