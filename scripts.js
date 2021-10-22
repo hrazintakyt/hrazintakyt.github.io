@@ -82,6 +82,12 @@ profBtn.onclick = (function(){
     var gameTime = document.getElementById("gameTimerDiv");
     gameTime.style = ("display: none;");
     
+    //if profile button has been clicked before, we remove the image so no dupes
+    var pp2 = document.getElementById("myProfPic2");
+    if(pp2.children[0].src !== null){
+        pp2.children[0].remove();
+        }
+    
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           
