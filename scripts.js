@@ -191,13 +191,17 @@ profBtn.onclick = (function(){
                 var childImg = document.createElement("img");
                 
                 console.log(myProfPic.children);
+                if(myProfPic.children[0]){
+                //do nothing  
+                }else{
+                
                 childImg.src = imgUrl;
                 childImg.style = "height: 180px; width: 160px; border: 2px solid black;";
                 myProfPic.appendChild(childImg);
                 myProfPic.style = "position: relative; margin-left: 2vw;";
                 var inpt = document.getElementById("inputFileToLoad");
                 inpt.style = "margin-left: 2vw;";
-                
+                }
                 
 
   });
