@@ -722,7 +722,7 @@
                    console.log(snapshot.data());
                   var ssd = snapshot.data();
                   var blitzRating = ssd.blitzRating;
-                  var lastLiveGame = ssd.lastLiveGame;
+                  var lastLiveGame = ssd.lastLiveGame.seconds;
                   //since the data exists already, we dont need the button tied to the function to get the profile:
                   var ratingBtn = document.getElementById("sccun");
                   var chessUsrNm = document.getElementById("ccun");
