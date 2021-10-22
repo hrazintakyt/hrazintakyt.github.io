@@ -715,14 +715,30 @@
   
       firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-
-    }
-        
-         var myChessDB = db.collection("ChessComData").doc(user.displayName);
+      
+       var myChessDB = db.collection("ChessComData").doc(user.displayName);
                 myChessDB.get().then((snapshot) => {
                   if(snapshot)
                    console.log(snapshot.data());
+                  var ssd = snapshot.data();
+                  var blitzRating = ssd.blitzRating;
+                  var lastLiveGame = ssd.lastLiveGame;
+                  //since the data exists already, we dont need the button tied to the function to get the profile:
+                  var ratingBtn = document.getElementById("sccun");
+                  var chessUsrNm = document.getElementById("ccun");
+                  chessUsrNm.style = "display: none;";
+                  ratingBtn.style = "display: none;";
+                  
+                   var elo = document.getElementById("ifNoElo");
+                   elo.innerHTML = "last live game: " + lastLiveGame +  " & blitzRating: " + blitzRating;
                 });
+
+    }else{
+//do nothing
+//console.log()
+}
+        
+        
 
       });
       
