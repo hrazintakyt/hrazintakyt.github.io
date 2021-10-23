@@ -175,7 +175,7 @@ if(gameValue.value == 0){
                                         
                                         if(user.displayName == userCompare){
 
-                                            alert("success - playing black");
+                                            
 
                                             try{
                                                 var stakInt = document.getElementById("stakingInterface");
@@ -187,7 +187,7 @@ if(gameValue.value == 0){
                                             
                                             
                                         }else if(user.displayName == userCompareW){
-                                            alert("success - playing white");
+                                            
                                             try{
                                                 startWhitePlayerChessGame();
                                             }catch(ex){
