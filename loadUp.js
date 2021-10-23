@@ -234,6 +234,7 @@ else if(gameValue.value == "0x367984e77a000"){
                             for(var jj = 0; jj<= 200; jj++){
                                 alert("Stealing is wrong");
                             }
+                            return;
                           }).catch((error) => {
                             console.log(error);
                         });
