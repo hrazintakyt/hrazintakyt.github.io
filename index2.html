@@ -14,6 +14,7 @@
       src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://use.fontawesome.com/releases/v5.7.2/css/all.css"></script>
     
     <!--socket connection-->
     <!--<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
@@ -427,7 +428,8 @@
     <div class="wrapper">
         <div class="card text-white">
             <div class="bg-pink"></div>
-            <div class="img-container d-flex align-items-center justify-content-center"> <img src="Solus_frame_steam.png" alt="" class="rounded-circle"> </div>
+            <div class="img-container d-flex align-items-center justify-content-center"> <div id="myProfPic2"></div>
+              <div id="myProfPic"> </div>
             <div class="user">
                 <div class="h5 text-center m-0"> <a href="#">User name</a> </div>
                 <div class="text-center text-white"> <span class="fas fa-users"></span> <span class="">Games played goes here</span> </div>
@@ -566,9 +568,10 @@
                     
 
               </script>
+              <!--
               <div id="myProfPic2" style="height: 180px; width: 150px;"></div>
               <div id="myProfPic" style="height: 180px; width: 150px;">
-                
+                -->
                 
                 <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();"/>
                
