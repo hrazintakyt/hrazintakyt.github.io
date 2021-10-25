@@ -259,7 +259,7 @@
             });
 
             //if chessComData exists, get it from db
-
+            console.log(user.displayName)
                 var myChessDB = db.collection("ChessComData").doc(user.displayName);
                 myChessDB.get().then((snapshot) => {
                   if(snapshot)
