@@ -1,0 +1,348 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="proframe/min.css">
+    <link rel="stylesheet" href="proframe/prof.css">
+
+
+</head>
+<body>
+
+
+
+    <div class="wrapper">
+        <div class="card text-white">
+            <div class="bg-pink"></div>
+            <div  id="myProfPic2" class="img-container d-flex align-items-center justify-content-center"> </div>
+            <div id="myProfPic"></div>
+            <div class="user">
+                <div class="h5 text-center m-0"> <a href="#"><span id="profileUserName" class="profileDetails"> </span></a> </div>
+                <div class="text-center text-white"> <span class="fas fa-users"></span> <span id="profileGames" class="profileDetails"></span> </div>
+                <div class="d-flex align-items-center justify-content-center mt-2">
+
+                </div>
+            </div>
+            <div class="px-3">
+                <div class="d-flex align-items-center justify-content-between py-3 pe-none">
+                    <div class="details snippets">
+                        <div class="head text-uppercase">Wins <span class="far fa-edit"></span></div>
+                        <div class="fs-08 text-center">0</div>
+                    </div>
+                    <div class="details project">
+                        <div class="head text-uppercase">Losses <span class="fas fa-project-diagram"></span></div>
+                        <div class="fs-08 text-center">0</div>
+                    </div>
+                    <div class="details post">
+                        <div class="head text-uppercase">Draws <span class="far fa-comments"></span></div>
+                        <div class="fs-08 text-center">0</div>
+                    </div>
+                </div>
+                <div class="skills">
+                    <div class=" head text-uppercase"> <span class="fas fa-code"></span></div>
+                    <div class=" pb-3 pt-2">
+                        <div class="text-uppercase fs-08"><span class="pe-1 fab fa-html5"></span>Wins</div>
+                        <div class="level">
+                            <div class="progress w-100 html">
+                                <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="ps-2 text-end fs-08 ">0%</div>
+                        </div>
+                        <div class="text-uppercase fs-08"><span class="pe-1 fab fa-css3"></span>Losses</div>
+                        <div class="level">
+                            <div class="progress w-100 css">
+                                <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="ps-2 text-end fs-08">0%</div>
+                        </div>
+                        <div class="text-capitalize fs-08"><span class="pe-1 fab fa-js"></span>Draws</div>
+                        <div class="level">
+                            <div class="progress w-100 js">
+                                <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="ps-2 text-end fs-08 ">0%</div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <p id="ifNoElo"></p>
+                <p id="ifNoBlitz"></p>
+                <input placeholder="Enter chess com user" id="ccun" type="text"/>
+                <button id="sccun" type="button"> Get rating </button>
+
+                <span>Upload Profile Image Below</span>
+                <input id="inputFileToLoad" label="Upload" type="file" onchange="encodeImageFileAsURL();"/>
+  
+                
+ <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+
+ <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+ <!-- Add Firebase products that you want to use -->
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <script>
+        //initializeFireBase:
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYWOkstaJjlQl3921ha4rlxn-okivM7Os",
+    authDomain: "gremchess.firebaseapp.com",
+    databaseURL: "https://gremchess-default-rtdb.firebaseio.com",
+    projectId: "gremchess",
+    storageBucket: "gremchess.appspot.com",
+    messagingSenderId: "775453383771",
+    appId: "1:775453383771:web:c4495af2fade87b4ac337e",
+    measurementId: "G-L0B8RVDQ7D"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  db.settings({ timestampsInSnapshots: true});
+  
+    </script>
+
+    <!--script for pulling chess com data-->
+    <script>
+        var ratingBtn = document.getElementById("sccun");
+        var chessUsrNm = document.getElementById("ccun");
+
+        ratingBtn.onclick = function(){
+          
+            let request = new XMLHttpRequest();
+
+            var chessComUserName = chessUsrNm.value;
+            
+            request.open("GET", "https://api.chess.com/pub/player/" + chessComUserName + "/stats");
+            request.send();
+            request.onload = () => {
+            console.log(request);
+            if(request.status === 200 ){
+            var snapshot = JSON.parse(request.response);
+            console.log(snapshot)
+            
+                  var blitzRating = snapshot.chess_blitz.last.rating;
+                  console.log(blitzRating);
+                  
+                  var lastLiveGame = snapshot.chess_blitz.last.date;
+                  console.log(lastLiveGame);
+                  //since the data exists already, we dont need the button tied to the function to get the profile:
+                  var ratingBtn = document.getElementById("sccun");
+                  var chessUsrNm = document.getElementById("ccun");
+                  
+                  console.log(lastLiveGame);
+                  var currentDate =  new Date();
+                  
+                  var dateLa = new Date(lastLiveGame * 1000);
+                  console.log(dateLa);
+                  var timeDifference = currentDate - dateLa;
+                  console.log(dateLa - timeDifference);
+                  var chessComLastGame =  Math.floor(((timeDifference/6000)/600)/24 );
+                  if(chessComLastGame <= 30){
+                  chessUsrNm.style = "display: none;";
+                  ratingBtn.style = "display: none;";
+                  var elo = document.getElementById("ifNoElo");
+                  elo.innerHTML = "Last Live: " + dateLa + " - " + Math.floor(((timeDifference/6000)/600)/24 ) + " days ago ";
+                  var blitz = document.getElementById("ifNoBlitz");
+                  blitz.innerHTML = " Blitz Rating: " + blitzRating;
+
+                  }else{
+                      alert("Last Live Game Expired, please add chess com account with last live blitz game within past 30 days");
+                  }
+
+            //now we sync with the db:
+            user.updateProfile({
+            lastLiveGame: dateL,
+            blitzRating: blitzR
+            }).then(function() {
+              var elo = document.getElementById("ifNoElo");
+              elo.innerHTML = user.lastLiveGame;
+
+              var ratingBtn = document.getElementById("sccun");
+              ratingBtn.style = "display: none;";
+              var chessUsrNm = document.getElementById("ccun");
+              chessUsrNm.style = "display: none;";
+
+            });
+
+
+            }else{
+            console.log("error")
+            }
+
+            }
+
+         
+        };
+
+      </script>
+
+<!--firebase functions for existing data-->
+    <script>
+
+        firebase.auth().onAuthStateChanged(function(user) 
+        {
+            if (user) { 
+                var profileUserName = document.getElementById("profileUserName");
+                profileUserName.innerHTML = " " + user.displayName;
+
+                //now we add the mutation observer:
+                var targetNode = document.getElementById("myProfPic");
+
+                const config = { attributes: true, childList: true, subtree: true };
+
+                const callback = function(mutationsList, observer) {
+                    // Use traditional 'for loops' for IE 11
+                    for(const mutation of mutationsList) {
+                        if (mutation.type === 'childList') {
+                        
+                            //Someone uploaded a pic
+                            var strictParent = document.getElementById("myProfPic");
+                            var concernedChild = strictParent.children[0];
+                        
+                            var concernedChildSrc = concernedChild.src;
+
+                            console.log(concernedChildSrc);
+
+                            //set the static prof pic to display: null;
+                            var profPic2 = document.getElementById("myProfPic2")
+                            profPic2.style = "display: none;";
+
+                            var profImg = db.collection("ProfilePictures").doc(user.displayName);
+
+                            profImg.set({
+                            userProfile: concernedChildSrc
+                            }).then((d)=>{
+                                if(d)
+                                    alert("uploaded2Server");
+                                });
+
+                                observer.disconnect();
+                            }
+                            else if (mutation.type === 'attributes') {
+                                console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                            }
+                        }
+                    };
+
+
+                 const observer = new MutationObserver(callback);
+
+                 observer.observe(targetNode, config);
+            }
+
+            //if img exists, get it from db
+            var myPic = db.collection("ProfilePictures").doc(user.displayName);
+            myPic.get().then((pic)=>{
+                if(pic)
+    
+                var profPic = pic.data();
+                var imgUrl = profPic.userProfile;
+                //using a different div to avoid triggering mutation observer rewriting image data as null
+                var myProfPic = document.getElementById("myProfPic2");
+                var childImg = document.createElement("img");
+                childImg.src = imgUrl;
+                myProfPic.appendChild(childImg);
+                myProfPic.style = "position: relative; height: 100px; margin-left: 30%; width: 40%; margin-top: -25%;";
+                childImg.style = "position: relative; bottom: 0px; top: 0px; right: 0px; left: 0px; border-radius: 50%;";
+                
+                
+
+            });
+
+            //if chessComData exists, get it from db
+
+                var myChessDB = db.collection("ChessComData").doc(user.displayName);
+                myChessDB.get().then((snapshot) => {
+                  if(snapshot)
+                   console.log(snapshot.data());
+                  var ssd = snapshot.data();
+                  var blitzRating = ssd.blitzRating;
+                  var lastLiveGame = ssd.lastLiveGame.seconds;
+                  //since the data exists already, we dont need the button tied to the function to get the profile:
+                  var ratingBtn = document.getElementById("sccun");
+                  var chessUsrNm = document.getElementById("ccun");
+                  
+                  console.log(lastLiveGame);
+                  var currentDate =  new Date();
+                  
+                  var dateLa = new Date(lastLiveGame * 1000);
+                  console.log(dateLa);
+                  var timeDifference = currentDate - dateLa;
+                  console.log(dateLa - timeDifference);
+                  var chessComLastGame =  Math.floor(((timeDifference/6000)/600)/24 );
+                  if(chessComLastGame <= 30){
+                  chessUsrNm.style = "display: none;";
+                  ratingBtn.style = "display: none;";
+                  var elo = document.getElementById("ifNoElo");
+                  elo.innerHTML = "Last Live: " + dateLa + " - " + Math.floor(((timeDifference/6000)/600)/24 ) + " days ago ";
+                  var blitz = document.getElementById("ifNoBlitz");
+                  blitz.innerHTML = " Blitz Rating: " + blitzRating;
+
+                  }else{
+                      alert("Last Live Game Expired, please add chess com account with last live game within past 30 days");
+                  }
+                   
+                });
+
+    
+        
+
+        
+        });
+
+        
+
+
+
+
+    </script>
+
+
+<script type='text/javascript'>
+  function encodeImageFileAsURL() {
+
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0) {
+      var fileToLoad = filesSelected[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result; // <--- data: base64
+       
+        
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+        newImage.style = "position: relative; bottom: 0px; top: 0px; right: 0px; left: 0px; border-radius: 50%;"
+
+        document.getElementById("myProfPic2").innerHTML = newImage.outerHTML;
+        
+        document.getElementById("myProfPic2").style = "position: relative; height: 100px; margin-left: 30%; width: 40%; margin-top: -25%;"
+
+        console.log("Converted Base64 version is " + document.getElementById("myProfPic").innerHTML);
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+</script>
+
+
+            </div>
+        </div>
+    </div>
+
+    
+    
+</body>
+
+
+</html>
