@@ -73,7 +73,7 @@ startWhitePlayerChessGame = function () {
                       tblack.innerHTML = blackGameTime;
                       game.clear();
                       alert("you win");
-                      stopInterval(blackTurn);
+                      
           
                     }
 
