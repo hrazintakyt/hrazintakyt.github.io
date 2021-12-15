@@ -526,7 +526,7 @@
                       res.json(receipt);
                     }
                   }
-                    console.log("preRequest");
+                    
                       console.log(txHash);
                       
                      ethereum.request({
@@ -543,8 +543,8 @@
                    },
                   ],
                }).then((txHash) => {
-                       console.log("line 546 hit");
-                  console.log(txHash);
+                       
+                  console.log({txHash});
                   console.log(payVal);
                   var kqftf = document.getElementById("1a2g6jhh");
                   kqftf.innerText = txHash.value;
@@ -561,13 +561,13 @@
                   var confirMation = db.collection("Vdation").doc();
                   var myReference = confirMation.path;
                   console.log(confirMation)
-                  myReference.set({
+                  db.ref(myReference).set({
                     aibasd: txHash.from,
                     kqftf: txHash.value,
                     underBelly: txHash.to,
                     not12g6jhh3: txHash.nonce
                   });
-                console.log(confirMation, myReference)
+                console.log('db write complete')
                   
                 })
                .catch((error) => function(error){
