@@ -507,6 +507,7 @@
                       var elHt = gameValue.children[el];
                       console.log(elHt.value);
                       var payVal = elHt.value;
+                      console.log(payVal);
                       if(payVal == 0){
                         seekGameButton.disabled = false;
                         pay.disabled = true;
@@ -516,6 +517,7 @@
                       let accounts = [];
                     var userAct = document.getElementById('accounts');
                     accounts.push(userAct.innerHTML);
+                      console.log(accounts[0]);
 
                     var txHash = (error, receipt) => {
                     if (error) console.error(error);
@@ -524,7 +526,9 @@
                       res.json(receipt);
                     }
                   }
-                    
+                    console.log("preRequest");
+                      console.log(txHash);
+                      
                      ethereum
                      .request({
                      method: 'eth_sendTransaction',
@@ -539,8 +543,7 @@
                      gas: '0x2710',
                    },
                   ],
-               })
-                .then((txHash) => function(txHash){
+               }).then((txHash) => function(txHash){
                   console.log(txHash);
                   console.log(payVal);
                   var kqftf = document.getElementById("1a2g6jhh");
@@ -569,8 +572,9 @@
                  console.log(error);
                  
                });
+                      console.log("test")
             });
-
+console.log("test2")
                     });
                     
 
