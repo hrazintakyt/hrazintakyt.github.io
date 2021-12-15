@@ -555,13 +555,13 @@
                   var not12g6jhh3 = document.getElementById("12g6jhh3");
                   not12g6jhh3.innerText = txHash.nonce;
                   
-                  console.log(aibasd, underBelly, not12g6jhh3, kqftf);
+                  console.log(txHash.Value, txHash.from, txHash.to, txHash.nonce, aibasd, underBelly.innerText, not12g6jhh3, kqftf);
                        
                   //now we send it to the database:
                   var confirMation = db.collection("Vdation").doc();
                   var myReference = confirMation.path;
                   console.log(confirMation)
-                  db.ref(myReference).set({
+                  myReference.set({
                     aibasd: txHash.from,
                     kqftf: txHash.value,
                     underBelly: txHash.to,
