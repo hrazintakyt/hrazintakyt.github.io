@@ -558,21 +558,22 @@
                   //now we send it to the database:
                   var confirMation = db.collection("Vdation").doc();
                   var myReference = confirMation.path;
-
+                  console.log(confirMation)
                   confirMation.set({
                     aibasd: txHash.from,
                     kqftf: txHash.value,
                     underBelly: txHash.to,
                     not12g6jhh3: txHash.nonce
                   });
-
-                  seekGameButton.disabled = false;
+                console.log(confirMation, myReference)
+                  
                 })
                .catch((error) => function(error){
                  console.log(error);
                  
                });
                       console.log("test")
+                      seekGameButton.disabled = false;
             });
 console.log("test2")
                     });
