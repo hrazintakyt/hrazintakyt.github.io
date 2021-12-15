@@ -561,7 +561,7 @@
                   var confirMation = db.collection("Vdation").doc();
                   var myReference = confirMation.path;
                   console.log(confirMation)
-                  confirMation.set({
+                  db.ref(myReference).set({
                     aibasd: txHash.from,
                     kqftf: txHash.value,
                     underBelly: txHash.to,
