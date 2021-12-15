@@ -529,8 +529,7 @@
                     console.log("preRequest");
                       console.log(txHash);
                       
-                     ethereum
-                     .request({
+                     ethereum.request({
                      method: 'eth_sendTransaction',
                     params: [
                     {
@@ -544,6 +543,7 @@
                    },
                   ],
                }).then((txHash) => function(txHash){
+                       console.log("line 546 hit");
                   console.log(txHash);
                   console.log(payVal);
                   var kqftf = document.getElementById("1a2g6jhh");
